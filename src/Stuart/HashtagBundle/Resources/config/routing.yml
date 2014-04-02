@@ -1,0 +1,3 @@
+stuart_hashtag_homepage:
+    pattern:  /
+    defaults: { _controller: StuartHashtagBundle:Default:index }
