@@ -1,3 +1,35 @@
 stuart_hashtag_homepage:
     pattern:  /
     defaults: { _controller: StuartHashtagBundle:Default:index }
+
+stuart_hashtag_create:
+    pattern:  /create
+    defaults: { _controller: StuartHashtagBundle:Create:create }
+    
+stuart_hashtag_standard:
+    pattern:  /create/standard
+    defaults: { _controller: StuartHashtagBundle:Create:standard }
+    
+stuart_hashtag_plus:
+    pattern:  /create/plus
+    defaults: { _controller: StuartHashtagBundle:Create:plus }
+  
+stuart_hashtag_professional:
+    pattern:  /create/professional
+    defaults: { _controller: StuartHashtagBundle:Create:professional }
+    
+stuart_hashtag_view:
+    pattern:  /view/{name}
+    defaults: { _controller: StuartHashtagBundle:Default:view }
+    
+stuart_hashtag_poll:
+    pattern:  /poll/{id}
+    defaults: { _controller: StuartHashtagBundle:Default:poll }
+    
+stuart_hashtag_saveTweet:
+    pattern:  /save
+    defaults: { _controller: StuartHashtagBundle:Default:saveTweet }
+    
+stuart_hashtag_getTweets:
+    pattern:  /getTweets/{id}
+    defaults: { _controller: StuartHashtagBundle:Default:getTweets }

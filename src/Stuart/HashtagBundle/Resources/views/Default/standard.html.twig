@@ -1,0 +1,34 @@
+{% extends "StuartHashtagBundle:Default:create.html.twig" %}
+
+{% block main %}
+<form role="form" method="post">
+  <div class="form-group">
+    <label for="hashtag">Hashtag</label>
+    <input type="text" class="form-control" name="hashtag" id="hashtag" placeholder="Enter hashtag">
+  </div>
+  <div class="form-group">
+    <label for="name">Hashtag Thing Name</label>
+    <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
+  </div>
+  <div class="form-group">
+    <label for="subdomain">Subdomain</label>
+    <input type="text" class="form-control" name="subdomain" id="subdomain" placeholder="Enter Subdomain">
+  </div>
+  <div class="form-group">
+    <label for="theme">Theme</label>
+    <select name="theme" id="theme">
+        {% for theme in themes %}
+        <option value="{{ theme.id }}">{{ theme.themeName }}</option>
+        {% endfor %}
+    </select>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox"> <a href="#">{% block profanity %}{% endblock %}Profanity Filter</a>
+    </label>
+  </div>
+  {% block plus %}{% endblock %}
+  {% block pro %}{% endblock %}      
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>          
+{% endblock %}

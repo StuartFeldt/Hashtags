@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="shortcut icon" href="/favicon.ico">
 
-    <title>Cover Template for Bootstrap</title>
+    <title>{{ page.title }}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/assets/css/custom_global.css" rel="stylesheet">
+    <link href="/assets/css/blog.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -24,42 +25,72 @@
 
   <body>
 
-    <div class="site-wrapper">
+    <div class="blog-masthead">
+      <div class="container">
+        <nav class="blog-nav">
+          <a class="blog-nav-item" href="/">Home</a>
+          <a class="blog-nav-item {% if page.description == "Create" %}active{% endif %}" href="/create">Create Home</a>
+          <a class="blog-nav-item {% if page.description == "Standard" %}active{% endif %}" href="/create/standard">Standard</a>
+          <a class="blog-nav-item {% if page.description == "Standard+" %}active{% endif %}" href="/create/plus">Standard+</a>
+          <a class="blog-nav-item {% if page.description == "Professional" %}active{% endif %}" href="/create/professional">Professional</a>
+        </nav>
+      </div>
+    </div>
 
-      <div class="site-wrapper-inner">
+    <div class="container">
 
-        <div class="cover-container">
-
-          <div class="masthead clearfix">
-            <div class="inner">
-              <h3 class="masthead-brand">Cover</h3>
-              <ul class="nav masthead-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Contact</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="inner cover">
-            <h1 class="cover-heading">Cover your page.</h1>
-            <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-            <p class="lead">
-              <a href="#" class="btn btn-lg btn-default">Learn more</a>
-            </p>
-          </div>
-
-          <div class="mastfoot">
-            <div class="inner">
-              <p>Cover template for <a href="http://getbootstrap.com">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
-            </div>
-          </div>
-
-        </div>
-
+      <div class="blog-header">
+        <h1 class="blog-title">{{ page.heading }}</h1>
+        <p class="lead blog-description">{{ page.description }}</p>
       </div>
 
+      <div class="row">
+
+        <div class="col-sm-8 blog-main">
+           {% block main %}
+                
+            
+           {% endblock %}
+        </div><!-- /.blog-main -->
+
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>About</h4>
+            <p>Etiam porta <em>sem malesuada magna</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+          <div class="sidebar-module">
+            <h4>Reference & Help</h4>
+            <ol class="list-unstyled">
+              <li><span class="badge">Option Packs</span></li>
+              <li><a href="#">Standard</a></li>
+              <li><a href="#">Standard+</a></li>
+              <li><a href="#">Professional</a></li>
+              <li><span class="badge">Services</span></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">Pinterest</a></li>
+            </ol>
+          </div>
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
+
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <div class="blog-footer">
+      <p>
+        <a href="#">Back to top</a>
+      </p>
     </div>
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -67,5 +98,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     <script src="/assets/js/bootstrap.js"></script>
     <script src="/assets/js/docs.min.js"></script>
+    <script>
+        Holder.add_theme("Good", {background:"#ECF3F3", foreground:"#A5AAAA", size:75, font: "Monaco", fontweight:"normal"});
+        Holder.add_theme("Better", {background:"#5bc0de", foreground:"#eee", size:75, font: "Monaco", fontweight:"normal"});
+        Holder.add_theme("Best", {background:"#5cb85c", foreground:"#eee", size:75, font: "Monaco", fontweight:"normal"});
+    </script>
   </body>
 </html>

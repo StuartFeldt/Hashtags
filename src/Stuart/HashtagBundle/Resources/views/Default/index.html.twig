@@ -1,1 +1,264 @@
-{% extends "StuartHashtagBundle::layout.html.twig" %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <title>Hashtag your event</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/carousel.css" rel="stylesheet">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <div class="navbar-wrapper">
+      <div class="container">
+
+        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="#"></a>
+            </div>
+            <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/create">Create</a></li>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="/create">Learn More</a></li>
+                    <li class="divider"></li>
+                    <li class="dropdown-header">Packages</li>
+                        <li><a href="/create/standard">Standard</a></li>
+                        <li><a href="/create/plus">Standard+</a></li>
+                        <li><a href="/create/professional">Professional</a></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="item active">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Hashtag your event.</h1>
+              <h2>For free.</h2>
+              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p><a class="btn btn-lg btn-primary" href="/create" role="button">Create One</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Do some other stuff.</h1>
+              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Check one out</h1>
+              <p>Here is one with #STLCards as the hashtag.</p>
+              <p><a class="btn btn-lg btn-danger" href="/view/stlcards" role="button">View #STLCards</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
+      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+    </div><!-- /.carousel -->
+
+
+
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row">
+        <div class="col-lg-4">
+          <img  src="/assets/Social_Icons/twitter.png" alt="Generic placeholder image">
+          <h2>Twitter</h2>
+          <p>Pull tweets from Twitter based on #hashtag.  Images from yfrog, instagram, and twitpic will be displayed.</p>
+          <p><a class="btn btn-default" href="javascript:void()" role="button" data-toggle="modal" data-target="#twitterModal">View options &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->        
+        
+        <div class="col-lg-4">
+          <img src="/assets/Social_Icons/Instagram.png" alt="Generic placeholder image">
+          <h2>Instagram</h2>
+          <p>Pull images posed to Instagram tagged with #hashtag.  Also, displays any associated text and author.</p>
+          <p><a class="btn btn-default" href="javascript:void()" role="button" data-toggle="modal" data-target="#instagramModal">View options &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+          <img src="/assets/Social_Icons/pinterest.png" alt="Generic placeholder image">
+          <h2>Pinterest</h2>
+          <p>I don't really know exactly what pinterest does, but we will pull it.</p>
+          <p><a class="btn btn-default" href="javascript:void()" role="button" data-toggle="modal" data-target="#pinterestModal">View options &raquo;</a></p>
+        </div><!-- /.col-lg-4 -->
+      </div><!-- /.row -->
+    
+
+    <!-- Twitter Modal -->
+    <div class="modal fade" id="twitterModal" tabindex="-1" role="dialog" aria-labelledby="tModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="tModalLabel">Twitter Options & Upgrades</h4>
+          </div>
+          <div class="modal-body">
+              <p>Describe how we interact with Twitter</p>
+              <p>A la carte upgrades, filters, and options.  Prices.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Instagram Modal -->
+    <div class="modal fade" id="instagramModal" tabindex="-1" role="dialog" aria-labelledby="iModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="iModalLabel">Instagram Options & Upgrades</h4>
+          </div>
+          <div class="modal-body">
+              <p>Describe how we interact with Instagram</p>
+              <p>A la carte upgrades, filters, and options.  Prices.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Pinterest Modal -->
+    <div class="modal fade" id="pinterestModal" tabindex="-1" role="dialog" aria-labelledby="pModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="pModalLabel">Pinterest Options & Upgrades</h4>
+          </div>
+          <div class="modal-body">
+              <p>Describe how we interact with Pinterest</p>
+              <p>A la carte upgrades, filters, and options.  Prices.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">ok</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <!-- START THE FEATURETTES -->
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Standard <span class="text-muted">fo' free</span></h2>
+          <p class="lead">Standard options will include picking a subdomain & hashtag, standard profanity filter, 2 weeks of live time, 
+          choice of pre-made themes, choice of a background image or color, Twitter support only.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/Price/text:$0" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/Price/text:$200" alt="Generic placeholder image">
+        </div>
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Standard+ <span class="text-muted">well, it's a little bit...more</span></h2>
+          <p class="lead">In addition to the Standard pack, you also get a bit more time to view and collect hashtags.  
+              Maybe you can export to pdf or a video?  Custom themes?? Possibly.  Extra profanity blocks, User blocks?  Multi-Hashtag support. 
+              You got it.  Increased hashtag/minute collection. Instagram & Pinterest support.</p>
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <div class="row featurette">
+        <div class="col-md-7">
+          <h2 class="featurette-heading">Professional.  <span class="text-muted">This one is for real.</span></h2>
+          <p class="lead">In addition to everything in Standard and Standard+, we can have you log in with facebook, and limit viewing only to friends.
+              One full year of viewing, complete support with whatever updgrades you want.  Unlimited hashtag/minute collection.</p>
+        </div>
+        <div class="col-md-5">
+          <img class="featurette-image img-responsive" data-src="holder.js/500x500/Price/text:$500" alt="Generic placeholder image">
+        </div>
+      </div>
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+      <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 RSOS &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+    <script>
+    Holder.add_theme("Price", {background:"#5bc0de", foreground:"#eee", size:100, font: "Monaco", fontweight:"normal"});
+    </script>
+  </body>
+</html>

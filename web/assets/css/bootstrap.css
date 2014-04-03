@@ -288,7 +288,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #608341;
+  color: #6C83E0;
   text-decoration: none;
 }
 a:hover,
@@ -2377,8 +2377,8 @@ input[type="button"].btn-block {
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url('../fonts/glyphicons-halflings-regular.eot');
-  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('/fonts/glyphicons-halflings-regular.eot');
+  src: url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -4023,7 +4023,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-inverse {
   background-color: #101010;
-  border-color: #78AB46;
+
 }
 .navbar-inverse .navbar-brand {
   color: #999;
