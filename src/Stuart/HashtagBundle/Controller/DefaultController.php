@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Stuart\HashtagBundle\Entity\Tweet;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Codebird\Codebird;
+use Instagram\Instagram;
 
 class DefaultController extends Controller
 {
@@ -53,7 +54,6 @@ class DefaultController extends Controller
             'hashtag' => $site->getHashtag(),
             'reply' => $reply,
         );
-        
         return new JsonResponse($response);
     }    
     
@@ -75,6 +75,7 @@ class DefaultController extends Controller
         $tweetId = $request->get('tweet_id');
         $tweetTime = $request->get('tweet_time');
         $siteId = $request->get('siteId');
+        $tweetType = $request->get('tweet_type');
         
         
         $tweet = new Tweet();
@@ -85,6 +86,7 @@ class DefaultController extends Controller
         $tweet->setSiteId($siteId);
         $tweet->setTweetTime($tweetTime);
         $tweet->setTweetPic($tweetPic);
+        $tweet->settweetType($tweetType);
         
         $em = $this->getDoctrine()->getManager();
         $em->persist($tweet);
@@ -108,9 +110,24 @@ class DefaultController extends Controller
                 'tweetAuthor' => $tweet->getTweetAuthor(),
                 'tweetAuthorPic' => $tweet->getTweetAuthorPic(),
                 'tweetTime' => $tweet->getTweetTime(),
-                'tweetPic' => $tweet->getTweetPic() == "" ? "0" : $tweet->getTweetPic()
+                'tweetPic' => $tweet->getTweetPic() == "" ? "0" : $tweet->getTweetPic(),
+                'tweetType' => $tweet->getTweetType()
             ));
         }
+        shuffle($tweet_res);
         return new JsonResponse($tweet_res);
+    }
+    
+    public function getInstaAction($id) {
+        $auth_config = array(
+            'client_id'         => 'bc7bb286c6834142af582ef9a6029279',
+            'client_secret'     => '02bf67931e8b40509b463a63bd299733',
+            'redirect_uri'      => 'http://hashtag.stuartfeldt.com',
+            'scope'             => array( 'likes', 'comments', 'relationships' )
+        );
+
+        $auth = new \Instagram\Auth( $auth_config );
+        $auth->authorize();
+        return new JsonResponse(array('test' => $auth->getAccessToken($code)));
     }
 }
