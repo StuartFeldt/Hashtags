@@ -38,7 +38,7 @@
         <div id="tweets" class="hidden-phone" style="display:none;"></div>
     </div>
 </div>    
-
+       
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 <script type="text/javascript" src="/assets/js/functions.js"></script>
 <script type="text/javascript" src="/assets/js/moment.js"></script>
@@ -52,7 +52,7 @@
            console.log("has background");
            $('body').css('background-image', 'url("/assets/img/{{ page.background }}")');
         }
-        ht.init({{ page.site }}, "{{ page.hashtag }}", 10000, 6000);
+        ht.init({{ page.site }}, "{{ page.hashtag }}", 30000, 6000);
         setTimeout(ht.start(), 500);
        
     });

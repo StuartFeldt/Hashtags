@@ -33,3 +33,7 @@ stuart_hashtag_saveTweet:
 stuart_hashtag_getTweets:
     pattern:  /getTweets/{id}
     defaults: { _controller: StuartHashtagBundle:Default:getTweets }
+    
+stuart_hashtag_getInsta:
+    pattern:  /getInsta/{id}
+    defaults: { _controller: StuartHashtagBundle:Default:getInsta }

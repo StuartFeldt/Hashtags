@@ -69,6 +69,13 @@ class Tweet
      * @ORM\Column(name="tweetPic",  type="string", length=450)
      */
     private $tweetPic;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="tweetType",  type="string", length=450)
+     */
+    private $tweetType;
 
 
     /**
@@ -240,5 +247,28 @@ class Tweet
     public function gettweetPic()
     {
         return $this->tweetPic;
+    }
+    
+    /**
+     * Set tweetType
+     *
+     * @param string $tweetType
+     * @return Tweet
+     */
+    public function settweetType($tweetType)
+    {
+        $this->tweetType = $tweetType;
+
+        return $this;
+    }
+
+    /**
+     * Get tweetType
+     *
+     * @return string 
+     */
+    public function gettweetType()
+    {
+        return $this->tweetType;
     }
 }
