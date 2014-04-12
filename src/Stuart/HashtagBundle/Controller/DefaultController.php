@@ -7,7 +7,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Stuart\HashtagBundle\Entity\Tweet;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Codebird\Codebird;
-use Instagram\Instagram;
 
 class DefaultController extends Controller
 {
@@ -24,15 +23,26 @@ class DefaultController extends Controller
         if($site->getThemeId() != "") {
             $theme = $this->getDoctrine()->getRepository('StuartHashtagBundle:Theme')->find($site->getThemeId());
         }
+        
         //set page vars
         $page = array(
             "title" => $site->getName(), 
             "hashtag" => $site->getHashtag(),
             "background" => $site->getBackgroundImage() == "" ? -1 : $site->getBackgroundImage(),
             "site" => $site->getId(),
-            "theme" => $theme != "" ? $theme->getClass() : "empty"
+            "theme" => $theme != "" ? $theme->getClass() : "empty",
+            "description" => "create",
+            "heading" => "Create a hashtag"
             );
         
+        
+        //Check if site is within valid dates
+        $now = new \DateTime("now");
+        if($site->getStartDate() > $now || $site->getEndDate() < $now) {
+            $error = array('start' => $site->getStartDate(), 'end' => $site->getEndDate(), 'now' => $now);
+            return $this->render('StuartHashtagBundle:Default:view_error.html.twig', array('page' => $page, 'error' => $error));
+        }
+
         return $this->render('StuartHashtagBundle:Default:view.html.twig', array('page' => $page));
     }
     

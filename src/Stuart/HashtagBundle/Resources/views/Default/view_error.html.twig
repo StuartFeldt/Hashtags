@@ -1,0 +1,8 @@
+{# empty Twig template #}
+{% extends "StuartHashtagBundle:Default:create.html.twig" %}
+
+{% block main %}
+
+<div class="alert alert-danger alert-dismissable">The hashtag you are looking for has either expired or is not valid yet.</div>
+{{ dump(error) }}
+{% endblock %}
