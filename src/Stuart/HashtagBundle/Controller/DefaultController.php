@@ -24,23 +24,32 @@ class DefaultController extends Controller
             $theme = $this->getDoctrine()->getRepository('StuartHashtagBundle:Theme')->find($site->getThemeId());
         }
         
-        //set page vars
-        $page = array(
-            "title" => $site->getName(), 
-            "hashtag" => $site->getHashtag(),
-            "background" => $site->getBackgroundImage() == "" ? -1 : $site->getBackgroundImage(),
-            "site" => $site->getId(),
-            "theme" => $theme != "" ? $theme->getClass() : "empty",
-            "description" => "create",
-            "heading" => "Create a hashtag"
+         $page = array(
+                "title" => $site->getName(), 
+                "hashtag" => $site->getHashtag(),
+                "background" => $site->getBackgroundImage() == "" ? -1 : $site->getBackgroundImage(),
+                "site" => $site->getId(),
+                "theme" => $theme != "" ? $theme->getClass() : "empty",
+                "description" => "create",
+                "heading" => "Create a hashtag"
             );
-        
         
         //Check if site is within valid dates
         $now = new \DateTime("now");
         if($site->getStartDate() > $now || $site->getEndDate() < $now) {
-            $error = array('start' => $site->getStartDate(), 'end' => $site->getEndDate(), 'now' => $now);
-            return $this->render('StuartHashtagBundle:Default:view_error.html.twig', array('page' => $page, 'error' => $error));
+            //set page vars
+            $reason = $site->getStartDate() > $now ? "Site is not active yet." : "Site has expired.";
+            $lead = $site->getStartDate() > $now ? "Come back on ".$site->getStartDate()->format("F jS, Y") : "<a href='#'>Contact us</a> to renew & extend.";
+            $footer = $site->getStartDate() > $now ? "Good things come to those who wait." : "All good things come to an end.";
+            
+            $page = array(
+                "title" => "OH NO", 
+                "heading" => $reason,
+                "lead" => $lead,
+                "foot" => $footer,
+                "fixit" => "Home"
+            );
+            return $this->render('StuartHashtagBundle:Default:view_error.html.twig', array('page' => $page));
         }
 
         return $this->render('StuartHashtagBundle:Default:view.html.twig', array('page' => $page));
