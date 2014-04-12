@@ -34,6 +34,10 @@ stuart_hashtag_getTweets:
     pattern:  /getTweets/{id}
     defaults: { _controller: StuartHashtagBundle:Default:getTweets }
     
+stuart_hashtag_getTweetsTimeline:
+    pattern:  /getTweetsTimeline/{id}
+    defaults: { _controller: StuartHashtagBundle:Default:getTweetsTimeline }
+    
 stuart_hashtag_getInsta:
     pattern:  /getInsta/{id}
     defaults: { _controller: StuartHashtagBundle:Default:getInsta }
