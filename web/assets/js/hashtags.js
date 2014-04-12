@@ -16,7 +16,8 @@
             hashtag: "",
             pullInt: 10000,
             showInt: 6000,
-            env: "/app_dev.php/"
+            env: "/app_dev.php/",
+            timeline: false
         },
         
         //init function
@@ -50,6 +51,33 @@
             clearInterval(pollInt);
             clearInterval(showInt);
             clearInterval(instaInt);
+        },
+                
+        reset: function() {
+            clearInterval(pollInt);
+            clearInterval(showInt);
+            clearInterval(instaInt);
+            $('#tweets').empty();
+            ht.tweets.numTweets = 0;
+            ht.tweets.currentTweet = 0;
+            ht.tweets.splicedTweets = 0;
+            ht.tweets.tweets = [];
+        },
+                
+        timeline: function() {
+            ht.reset();
+            ht.options.timeline = true;
+            ht.start();
+            $('#ht-control-timeline').addClass("active");
+            $('#ht-control-random').removeClass("active");
+        },
+                
+        shuffle: function() {
+            ht.reset();
+            ht.options.timeline = false;
+            ht.start();
+            $('#ht-control-random').addClass("active");
+            $('#ht-control-timeline').removeClass("active");
         },
         
         getTweets: function() {
@@ -117,7 +145,8 @@
         
         pullTweets: function() {
             console.log("getting tweets from HQ and resetting tweets...");
-            $.getJSON(ht.options.env + 'getTweets/' + ht.options.site, function(data){
+            var url = ht.options.timeline ? 'getTweetsTimeline/' : 'getTweets/';
+            $.getJSON(ht.options.env + url + ht.options.site, function(data){
                 ht.tweets.numTweets = data.length;
                 ht.tweets.currentTweet = 0;
                 ht.tweets.splicedTweets = 0;

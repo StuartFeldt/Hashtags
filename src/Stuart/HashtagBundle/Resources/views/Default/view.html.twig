@@ -26,9 +26,31 @@
           </a>
           <a class="brand theme1" id="brand" href="/">#{{ page.hashtag }}</a>
           <ul class="nav navbar-nav pull-right">
-              <li id="ht-control-play"><a href="javascript:ht.start()"><span class="glyphicon glyphicon-play"></span></a></li>
-              <li id="ht-control-pause" class="active"><a href="javascript:ht.pause()"><span class="glyphicon glyphicon-pause"></span></a></li>
-              <li id="ht-control-random" class="active"><a href="javascript:void()"><span class="glyphicon glyphicon-random"></span></a></li>
+              
+              <li id="ht-control-play">
+                  <a href="javascript:ht.start()" title="Play">
+                      <span class="glyphicon glyphicon-play"></span>
+                  </a>
+              </li>
+              
+              <li id="ht-control-pause" class="active" title="Pause">
+                  <a href="javascript:ht.pause()">
+                      <span class="glyphicon glyphicon-pause"></span>
+                  </a>
+              </li>
+              
+              <li id="ht-control-random" class="active" title="Toggle Random Mode">
+                  <a href="javascript:ht.shuffle()">
+                      <span class="glyphicon glyphicon-random"></span>
+                  </a>
+              </li>
+              
+              <li id="ht-control-timeline">
+                  <a href="javascript:ht.timeline()" title="Toggle Timeline Mode">
+                      <span class="glyphicon glyphicon-time"></span>
+                  </a>
+              </li>
+              
           </ul>    
         </div>
     </div>

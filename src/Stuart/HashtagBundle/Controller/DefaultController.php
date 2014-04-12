@@ -118,6 +118,22 @@ class DefaultController extends Controller
         return new JsonResponse($tweet_res);
     }
     
+    public function getTweetsTimelineAction($id) {
+        $tweets = $this->getDoctrine()->getRepository('StuartHashtagBundle:Tweet')->findBySiteId($id);
+        $tweet_res = array();
+        foreach($tweets as $tweet) {
+            array_push($tweet_res, array(
+                'tweetBody' => $tweet->getTweetBody(),
+                'tweetAuthor' => $tweet->getTweetAuthor(),
+                'tweetAuthorPic' => $tweet->getTweetAuthorPic(),
+                'tweetTime' => $tweet->getTweetTime(),
+                'tweetPic' => $tweet->getTweetPic() == "" ? "0" : $tweet->getTweetPic(),
+                'tweetType' => $tweet->getTweetType()
+            ));
+        }
+        return new JsonResponse($tweet_res);
+    }
+    
     public function getInstaAction($id) {
         $auth_config = array(
             'client_id'         => 'bc7bb286c6834142af582ef9a6029279',
