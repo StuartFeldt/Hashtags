@@ -40,13 +40,21 @@ class CreateController extends Controller {
             $site->setSubdomain($request->get('subdomain'));
             $site->setThemeId($request->get('theme'));
             
+            $files = $request->files;
+            $directory = "/assets/img/";
+
+            foreach ($files as $uploadedFile) {
+                $name = $site->getName();
+                $file = $uploadedFile->move($directory, $name);
+            }
+            
             $em = $this->getDoctrine()->getManager();
             $em->persist($site);
             $em->flush();
             
-            return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
+            /*return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
                 'name'  => $site->getSubdomain()
-            ), true));
+            ), true));*/
 
         }
         
@@ -57,7 +65,7 @@ class CreateController extends Controller {
             "description" => 'Standard'
             );
         
-        return $this->render('StuartHashtagBundle:Default:standard.html.twig', array('page' => $page, 'themes' => $this->getThemes()));
+        return $this->render('StuartHashtagBundle:Default:standard.html.twig', array('page' => $page, 'themes' => $this->getThemes(), 'request' => $request));
     }
     
     public function plusAction(Request $request)
