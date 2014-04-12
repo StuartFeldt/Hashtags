@@ -1,0 +1,59 @@
+/* 
+    Document   : theme5
+    Created on : Apr 12
+    Author     : stuartfeldt
+    Description: theme for hashtag things
+    Omit anything if extra style not needed
+*/
+
+/* Theme 5 */
+
+/* body background color */
+body{ 
+  background-color: #454;
+  box-shadow: inset 0 0 100px rgba(50,50,50,.8);
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+/* hashtag color */
+#brand{ color: #888766; font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif; }
+
+/* navbar color */
+.navbar-inverse{ background-color: #222 }
+
+/* navbar border color */
+.navbar-inverse{ border-bottom:1px solid #444 }
+
+/* navbar controls active */
+.navbar-inverse .navbar-nav > .active > a, 
+.navbar-inverse .navbar-nav > .active > a:hover, 
+.navbar-inverse .navbar-nav > .active > a:focus { background-color:#2a2a2a !important }
+
+/* link colors */
+a { color: #454 }
+
+/* link hover colors */
+a:hover { color: #000 }
+
+/* tweet background color */
+.well.tweet { background-color: rgba(240, 240, 240, 0.9) !important;}
+
+/* tweet background border */
+.well.tweet { border: 1px solid #333 !important}
+
+/* tweet text color */
+.well.tweet { color: #555 !important}
+
+/* tweet text size */
+.well.tweet { font-size: 1.1em !important}
+
+/* tweet time color */
+.tweet_time { color: #666 !important}
+
+/* tweet time size */
+.tweet_time { font-size: 1em !important}
+
+/* tweet author name color */
+.tweet_author a { color: #666 !important}
+
+/* tweet author name size */
+.tweet_author a { font-size: .9em !important}

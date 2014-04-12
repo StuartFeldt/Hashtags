@@ -63,10 +63,7 @@ class CreateController extends Controller {
             
             $site->setStartDate($startDate);
             $site->setEndDate($endDate);
-            
-           // $site->setEndDate(date('Y-m-d', strtotime($site->getStartDate(). ' + 14 days')));
-            //$this->debug = array('startdate' => date( 'Y-m-d H:i:s', strtotime( $request->get('start'))));
-            
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($site);
             $em->flush();
