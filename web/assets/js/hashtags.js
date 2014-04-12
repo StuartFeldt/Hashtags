@@ -17,7 +17,9 @@
             pullInt: 10000,
             showInt: 6000,
             env: "/app_dev.php/",
-            timeline: false
+            timeline: false,
+            initiated: false,
+            playing: false
         },
         
         //init function
@@ -30,6 +32,7 @@
                 clientId: 'aea6ae8f16e741dbb264f86de4829688',
                 redirectUri: 'http://hashdev.stuartfeldt.com'
               });
+            ht.options.initiated = true;
         },
         
         //start
@@ -41,6 +44,7 @@
             pollInt = setInterval("ht.getTweets()", ht.options.pullInt);
             instaInt = setInterval("ht.getInsta()", 60000);
             showInt = setInterval("ht.showTweets()", ht.options.showInt);
+            ht.options.playing = true;
         },
         
         //pause
@@ -51,6 +55,7 @@
             clearInterval(pollInt);
             clearInterval(showInt);
             clearInterval(instaInt);
+            ht.options.playing = false;
         },
                 
         reset: function() {
