@@ -33,31 +33,7 @@ class CreateController extends Controller {
     
     public function standardAction(Request $request)
     {
-        if($request->get('hashtag')) {
-            $site = new Site();
-            $site->setName($request->get('name'));
-            $site->setHashtag($request->get('hashtag'));
-            $site->setSubdomain($request->get('subdomain'));
-            $site->setThemeId($request->get('theme'));
-            
-            $files = $request->files;
-            $directory = "/assets/img/";
-
-            foreach ($files as $uploadedFile) {
-                $name = $site->getName();
-                $file = $uploadedFile->move($directory, $name);
-            }
-            
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($site);
-            $em->flush();
-            
-            /*return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
-                'name'  => $site->getSubdomain()
-            ), true));*/
-
-        }
-        
+        $messages = 0;
         //set page vars
         $page = array(
             "title" => 'Create a hashtag', 
@@ -65,7 +41,33 @@ class CreateController extends Controller {
             "description" => 'Standard'
             );
         
-        return $this->render('StuartHashtagBundle:Default:standard.html.twig', array('page' => $page, 'themes' => $this->getThemes(), 'request' => $request));
+        if($request->get('hashtag')) {
+            
+            if($this->verifySubdomain($request->get('subdomain'))) {
+                $messages = array("error" => "Subdomain taken.  Please choose another.");
+                return $this->render('StuartHashtagBundle:Default:standard.html.twig', array('page' => $page, 'themes' => $this->getThemes(), 'messages' => $messages));
+            }
+            
+            $site = new Site();
+            $site->setName($request->get('name'));
+            $site->setHashtag($request->get('hashtag'));
+            $site->setSubdomain($request->get('subdomain'));
+            $site->setThemeId($request->get('theme'));
+            
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($site);
+            $em->flush();
+            
+            return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
+                'name'  => $site->getSubdomain()
+            ), true));
+
+        }
+        
+        
+        
+        return $this->render('StuartHashtagBundle:Default:standard.html.twig', array('page' => $page, 'themes' => $this->getThemes(), 'messages' => $messages));
     }
     
     public function plusAction(Request $request)
@@ -105,6 +107,10 @@ class CreateController extends Controller {
         }
         
         return $themeResults;
+    }
+    
+    function verifySubdomain($subdomain) {
+        return $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($subdomain);    
     }
     
 }
