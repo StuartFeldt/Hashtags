@@ -76,7 +76,17 @@
         }
         ht.init({{ page.site }}, "{{ page.hashtag }}", 30000, 6000);
         setTimeout(ht.start(), 500);
-       
+
+  $(document).keydown(function(evt) {
+    if (evt.keyCode == 32) {
+      if(ht.options.playing) {
+          ht.pause();
+        } else {
+          ht.start();
+        }
+    }
+  });
+
     });
 </script>
 </body>
