@@ -21,6 +21,11 @@ stuart_hashtag_professional:
 stuart_hashtag_view:
     pattern:  /view/{name}
     defaults: { _controller: StuartHashtagBundle:Default:view }
+
+stuart_hashtag_view_sub:
+    pattern: /
+    host: "{name}.hashtagmyevent.com"
+    defaults: { _controller: StuartHashtagBundle:Default:view }   
     
 stuart_hashtag_poll:
     pattern:  /poll/{id}
