@@ -176,7 +176,7 @@
                 }  
                 var tweetType = ht.tweets.tweets[ht.tweets.currentTweet].tweetType;
                 
-                if(ht.tweets.tweets[ht.tweets.currentTweet].tweetPic != "") {
+                if(ht.tweets.tweets[ht.tweets.currentTweet].tweetPic != "" && ht.tweets.tweets[ht.tweets.currentTweet].tweetPic != 0 && ht.tweets.tweets[ht.tweets.currentTweet].tweetPic != "noshow") {
                     $("<div class='tweet well "+tweetType+"' id='tweet"+ht.tweets.currentTweet+"'><div class='user_col'><div class='tweet_author_pic'><img src='"+ht.tweets.tweets[ht.tweets.currentTweet].tweetAuthorPic+"' /></div><div class='tweet_author'>"+"<a href='//twitter.com/'"+ht.tweets.tweets[ht.tweets.currentTweet].tweetAuthor+"'>@"+ht.tweets.tweets[ht.tweets.currentTweet].tweetAuthor+"</a></div></div><div class='body_col'><div class='tweet_body'>"+ht.tweets.tweets[ht.tweets.currentTweet].tweetBody.parseURL().parseUsername().parseHashtagaslink()+"</div><div class='tweet_time'>"+tweet_ts+"</div></div><div style='clear:both;'></div><div class='tweet_pic'><img src='"+ht.tweets.tweets[ht.tweets.currentTweet].tweetPic+"' /></div><div class='tweet_pic2'></div></div>").prependTo('#tweets').hide().slideDown();
                     
                 } else {

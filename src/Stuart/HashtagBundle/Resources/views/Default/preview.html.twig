@@ -26,13 +26,7 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand theme1" id="brand" href="/">#sample</a>
-          <label id="theme-selector-label" for="theme">Preview Theme:</label>
-            <select name="theme" id="theme">
-                <option>Select...</option>
-                {% for theme in themes %}
-                <option value="{{ theme.id }}">{{ theme.themeName }}</option>
-                {% endfor %}
-            </select>
+          
           <ul class="nav navbar-nav pull-right">
               
               <li id="ht-control-play">
@@ -101,8 +95,18 @@
             </div>
         </div>
     </div>
-</div>    
-       
+</div> 
+<div id="theme-container">
+ <span id="theme-selector">
+    <label id="theme-selector-label" for="theme">Preview Theme:</label>
+      <select name="theme" id="theme">
+          <option>Select...</option>
+          {% for theme in themes %}
+          <option value="{{ theme.id }}">{{ theme.themeName }}</option>
+          {% endfor %}
+      </select>
+    </span>   
+</div>
 <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
 
 <script type="text/javascript" src="/assets/js/bootstrap.js"></script>

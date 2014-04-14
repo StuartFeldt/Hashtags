@@ -41,30 +41,34 @@
                 <div class="col-md-4">
                   <!-- Logo-->
                   <div class="logo">
-                    <div id="front-page-title">HASHALBUM</div>
+                    <div id="front-page-title">HASHTAGMYEVENT</div>
                     <div id="front-page-text">Hashtag your event <span class="bullet">&#149;</span> <span class="gold">For free</span></div>
                   </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                        <a href="/create" type="button" id="get-started" class="btn btn-default btn-lg">Get Started</a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                        <p><a id="int-scroll" href="javascript:void()">Supported Social Platforms</a></p>
+                        <p><a id="packages-scroll" href="javascript:void()">View Packages & Pricing</a></p>
+                    </div>
+                  </div>
                 </div>
-                <div class="col-md-4" id="tweets">
+                <div class="col-md-8" id="tweets">
                     
                 </div>
               </div>
-
-              <div class="row">
-                  <div class="col-md-3">
-                  <a href="/create" type="button" id="get-started" class="btn btn-default btn-lg">Get Started</a>
-                  </div>
-              </div>
             </header>
-                
-            <div id="front-page-helper-text" class="gold pull-right"><span class="bigger">←</span> additional details</div>
 
         </div>
+        <div id="supported-platforms"></div>
     </div>
     
-    <div class="container marketing">
-      <h1 class="center">Supported Platforms</h1>
-      <hr/>
+    <div id="platforms-container" class="container marketing">
+      <h1 class="center featurette-heading">Supported Platforms</h1>
+      <hr>
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
@@ -87,7 +91,7 @@
           <p><a class="btn btn-default" href="javascript:void()" role="button" data-toggle="modal" data-target="#pinterestModal">View options &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
-    
+    </div>
 
     <!-- Twitter Modal -->
     <div class="modal fade" id="twitterModal" tabindex="-1" role="dialog" aria-labelledby="tModalLabel" aria-hidden="true">
@@ -145,10 +149,11 @@
         </div>
       </div>
     </div>
-
+    <div id="packages" class="container marketing">
+    
       <!-- START THE FEATURETTES -->
-      <h1 class="center">Packages</h1> 
-      <hr class="featurette-divider">
+      <h1 class="center featurette-heading">Packages & Pricing</h1> 
+      <hr>
       
       <div class="row featurette">
         <div class="col-md-7">
@@ -205,11 +210,35 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="/assets/js/bootstrap.js"></script>
-    <script src="/assets/js/docs.min.js"></script>
+    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="/assets/js/functions.js"></script>
+    <script type="text/javascript" src="/assets/js/moment.js"></script>
+    <script type="text/javascript" src="/assets/js/instajam.js"></script>
+    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/assets/js/docs.min.js"></script>
+    <script type="text/javascript" src="/assets/js/Tweedia.js"></script>
+    <script type="text/javascript" src="/assets/js/hashtags.js"></script>
     <script>
     Holder.add_theme("Price", {background:"#5bc0de", foreground:"#eee", size:100, font: "Monaco", fontweight:"normal"});
+    $(document).ready(function(){
+        ht.init(33, "", 30000, 6000);
+        setTimeout("ht.showTweets()", 500);
+        setInterval("ht.showTweets()", 6000);
+        
+    });
+    
+    $('#packages-scroll').click(function(){
+       $('html,body').animate({
+        scrollTop: $("#packages").offset().top},
+        'slow'); 
+    });
+    
+    $('#int-scroll').click(function(){
+       $('html,body').animate({
+        scrollTop: $("#supported-platforms").offset().top},
+        'slow'); 
+    });
+    
     </script>
   </body>
 </html>

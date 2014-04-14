@@ -145,7 +145,7 @@ class DefaultController extends Controller
                 'tweetAuthor' => $tweet->getTweetAuthor(),
                 'tweetAuthorPic' => $tweet->getTweetAuthorPic(),
                 'tweetTime' => $tweet->getTweetTime(),
-                'tweetPic' => $tweet->getTweetPic() == "" ? "0" : $tweet->getTweetPic(),
+                'tweetPic' => $tweet->getTweetPic() == "" || $tweet->getTweetPic() == "noshow" ? "0" : $tweet->getTweetPic(),
                 'tweetType' => $tweet->getTweetType()
             ));
         }
