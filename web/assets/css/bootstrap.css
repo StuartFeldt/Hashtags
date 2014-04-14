@@ -288,7 +288,7 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #6C83E0;
+  color: #428bca;
   text-decoration: none;
 }
 a:hover,
@@ -566,7 +566,6 @@ a.bg-danger:hover {
   padding-bottom: 9px;
   margin: 40px 0 20px;
   border-bottom: 1px solid #eee;
-  color:#46523C;
 }
 ul,
 ol {
@@ -2377,8 +2376,8 @@ input[type="button"].btn-block {
 @font-face {
   font-family: 'Glyphicons Halflings';
 
-  src: url('/fonts/glyphicons-halflings-regular.eot');
-  src: url('/fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+  src: url('../fonts/glyphicons-halflings-regular.eot');
+  src: url('../fonts/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../fonts/glyphicons-halflings-regular.woff') format('woff'), url('../fonts/glyphicons-halflings-regular.ttf') format('truetype'), url('../fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
 }
 .glyphicon {
   position: relative;
@@ -4022,8 +4021,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   color: #333;
 }
 .navbar-inverse {
-  background-color: #101010;
-
+  background-color: #222;
+  border-color: #080808;
 }
 .navbar-inverse .navbar-brand {
   color: #999;

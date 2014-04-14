@@ -41,3 +41,7 @@ stuart_hashtag_getTweetsTimeline:
 stuart_hashtag_getInsta:
     pattern:  /getInsta/{id}
     defaults: { _controller: StuartHashtagBundle:Default:getInsta }
+    
+stuart_hashtag_preview:
+    pattern: /preview/{themeId}
+    defaults: { _controller: StuartHashtagBundle:Default:preview }
