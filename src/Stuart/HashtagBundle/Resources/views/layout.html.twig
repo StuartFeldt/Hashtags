@@ -9,13 +9,13 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     <title>{{ page.title }}</title>
-
+    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="/assets/css/blog.css" rel="stylesheet">
-
+<link href="/assets/css/navigation.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -25,17 +25,7 @@
 
   <body>
 
-    <div class="blog-masthead">
-      <div class="container">
-        <nav class="blog-nav">
-          <a class="blog-nav-item" href="/">Home</a>
-          <a class="blog-nav-item {% if page.description == "Create" %}active{% endif %}" href="/create">Create Home</a>
-          <a class="blog-nav-item {% if page.description == "Standard" %}active{% endif %}" href="/create/standard">Standard</a>
-          <a class="blog-nav-item {% if page.description == "Standard+" %}active{% endif %}" href="/create/plus">Standard+</a>
-          <a class="blog-nav-item {% if page.description == "Professional" %}active{% endif %}" href="/create/professional">Professional</a>
-        </nav>
-      </div>
-    </div>
+    {% include 'StuartHashtagBundle::navigation.html.twig' %}
 
     <div class="container">
 

@@ -9,9 +9,11 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     <title>Hashtag your event</title>
-
+    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand|Fondamento' rel='stylesheet' type='text/css'>
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/css/navigation.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -25,95 +27,44 @@
 <!-- NAVBAR
 ================================================== -->
   <body>
-    <div class="navbar-wrapper">
-      <div class="container">
-
-        <div class="navbar navbar-inverse navbar-static-top" role="navigation">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="#"></a>
-            </div>
-            <div class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
-                <li><a href="/view/stlcards">Demo</a></li>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Create <b class="caret"></b></a>
-                  <ul class="dropdown-menu">
-                    <li><a href="/create">Learn More</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Packages</li>
-                        <li><a href="/create/standard">Standard</a></li>
-                        <li><a href="/create/plus">Standard+</a></li>
-                        <li><a href="/create/professional">Professional</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-
-
-    <!-- Carousel
-    ================================================== -->
-    <div id="myCarousel" class="carousel slide" data-ride="carousel">
-      <!-- Indicators -->
-      <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-        <li data-target="#myCarousel" data-slide-to="1"></li>
-        <li data-target="#myCarousel" data-slide-to="2"></li>
-      </ol>
-      <div class="carousel-inner">
-        <div class="item active">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Hashtag your event.</h1>
-              <h2>For free.</h2>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="/create" role="button">Create One</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Do some other stuff.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
-            </div>
-          </div>
-        </div>
-        <div class="item">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Check one out</h1>
-              <p>Here is one with #STLCards as the hashtag.</p>
-              <p><a class="btn btn-lg btn-danger" href="/view/stlcards" role="button">View #STLCards</a></p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <a class="left carousel-control" href="#myCarousel" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a>
-      <a class="right carousel-control" href="#myCarousel" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
-    </div><!-- /.carousel -->
-
-
-
+      
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
+    <div>
+        <div id="front-page">
 
+
+            <!-- Header-->
+            <header class="container pull-left">
+              <div class="row">
+                <div class="col-md-4">
+                  <!-- Logo-->
+                  <div class="logo">
+                    <div id="front-page-title">HASHALBUM</div>
+                    <div id="front-page-text">Hashtag your event <span class="bullet">&#149;</span> <span class="gold">For free</span></div>
+                  </div>
+                </div>
+                <div class="col-md-4" id="tweets">
+                    
+                </div>
+              </div>
+
+              <div class="row">
+                  <div class="col-md-3">
+                  <a href="/create" type="button" id="get-started" class="btn btn-default btn-lg">Get Started</a>
+                  </div>
+              </div>
+            </header>
+                
+            <div id="front-page-helper-text" class="gold pull-right"><span class="bigger">←</span> additional details</div>
+
+        </div>
+    </div>
+    
     <div class="container marketing">
-
+      <h1 class="center">Supported Platforms</h1>
+      <hr/>
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
@@ -196,9 +147,9 @@
     </div>
 
       <!-- START THE FEATURETTES -->
-
+      <h1 class="center">Packages</h1> 
       <hr class="featurette-divider">
-
+      
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">Standard <span class="text-muted">fo' free</span></h2>
@@ -206,7 +157,7 @@
           choice of pre-made themes, choice of a background image or color, Twitter support only.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/Price/text:$0" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive img-circle" data-src="holder.js/400x400/Price/text:$0" alt="Generic placeholder image">
         </div>
       </div>
 
@@ -214,7 +165,7 @@
 
       <div class="row featurette">
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/Price/text:$200" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive img-circle" data-src="holder.js/400x400/Price/text:$200" alt="Generic placeholder image">
         </div>
         <div class="col-md-7">
           <h2 class="featurette-heading">Standard+ <span class="text-muted">well, it's a little bit...more</span></h2>
@@ -233,7 +184,7 @@
               One full year of viewing, complete support with whatever updgrades you want.  Unlimited hashtag/minute collection.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive" data-src="holder.js/500x500/Price/text:$500" alt="Generic placeholder image">
+          <img class="featurette-image img-responsive img-circle" data-src="holder.js/400x400/Price/text:$500" alt="Generic placeholder image">
         </div>
       </div>
 

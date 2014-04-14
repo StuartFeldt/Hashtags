@@ -10,9 +10,20 @@ use Codebird\Codebird;
 
 class DefaultController extends Controller
 {
+    
+    public $page = array(
+        "title" => 'title',
+        "hashtag" => 'hashtag',
+        "background" => 'background',
+        "site" => 'site',
+        "theme" => 'theme',
+        "description" => 'home',
+        "heading" => 'heading'
+    );
+    
     public function indexAction()
     {
-        return $this->render('StuartHashtagBundle:Default:index.html.twig', array());
+        return $this->render('StuartHashtagBundle:Default:index.html.twig', array('page' => $this->page));
     }
     
     public function viewAction($name)
@@ -24,7 +35,7 @@ class DefaultController extends Controller
             $theme = $this->getDoctrine()->getRepository('StuartHashtagBundle:Theme')->find($site->getThemeId());
         }
         
-         $page = array(
+         $this->page = array(
                 "title" => $site->getName(), 
                 "hashtag" => $site->getHashtag(),
                 "background" => $site->getBackgroundImage() == "" ? -1 : $site->getBackgroundImage(),
@@ -42,17 +53,22 @@ class DefaultController extends Controller
             $lead = $site->getStartDate() > $now ? "Come back on ".$site->getStartDate()->format("F jS, Y") : "<a href='#'>Contact us</a> to renew & extend.";
             $footer = $site->getStartDate() > $now ? "Good things come to those who wait." : "All good things come to an end.";
             
-            $page = array(
+            $this->page = array(
                 "title" => "OH NO", 
                 "heading" => $reason,
                 "lead" => $lead,
                 "foot" => $footer,
                 "fixit" => "Home"
             );
-            return $this->render('StuartHashtagBundle:Default:view_error.html.twig', array('page' => $page));
+            return $this->render('StuartHashtagBundle:Default:view_error.html.twig', array('page' => $this->page));
         }
 
-        return $this->render('StuartHashtagBundle:Default:view.html.twig', array('page' => $page));
+        return $this->render('StuartHashtagBundle:Default:view.html.twig', array('page' => $this->page));
+    }
+    
+    public function previewAction($themeId) {
+        $this->page["theme"] = "theme".$themeId;
+        return $this->render('StuartHashtagBundle:Default:preview.html.twig', array('page' => $this->page, 'themes' => $this->getThemes()));
     }
     
     public function pollAction($id)
@@ -164,5 +180,20 @@ class DefaultController extends Controller
         $auth = new \Instagram\Auth( $auth_config );
         $auth->authorize();
         return new JsonResponse(array('test' => $auth->getAccessToken($code)));
+    }
+    
+    function getThemes() {
+        $themes = $this->getDoctrine()->getRepository('StuartHashtagBundle:Theme')->findAll();
+        
+        $themeResults = array();
+        foreach($themes as $theme) {
+            array_push($themeResults, array(
+                'themeName' => $theme->getThemeName(),
+                'themeClass' => $theme->getClass(),
+                'id' => $theme->getId()
+            ));
+        }
+        
+        return $themeResults;
     }
 }

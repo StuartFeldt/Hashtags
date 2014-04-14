@@ -7,8 +7,71 @@ body {
   color: #5a5a5a;
 }
 
+/* front-page styles */
 
+#front-page {
+    height:100vh;
+    background-color:#232323;
+    color:#aaa;
+    font-family: 'Quicksand', sans-serif;
+    margin-bottom:25px
+}
 
+#front-page-text-contain {
+
+}
+
+#front-page-title {
+    font-size:38px;
+}
+
+#front-page-text {
+    
+}
+
+#front-page-helper-text {
+  -webkit-transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -ms-transform: rotate(-90deg);
+  -o-transform: rotate(-90deg);
+  transform: rotate(-90deg);
+
+  /* also accepts left, right, top, bottom coordinates; not required, but a good idea for styling */
+  -webkit-transform-origin: 50% 50%;
+  -moz-transform-origin: 50% 50%;
+  -ms-transform-origin: 50% 50%;
+  -o-transform-origin: 50% 50%;
+  transform-origin: 50% 50%;
+
+  /* Should be unset in IE9+ I think. */
+  filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  font-family: 'Fondamento', cursive;
+
+}
+
+#front-page header {
+    padding-top:200px;
+}
+
+#get-started {
+    margin-top:14px;
+}
+
+.bigger {
+    
+}
+
+.gold {
+    color: gold;
+}
+
+.social-integrations {
+    text-align:center;
+}
+
+.center {
+    text-align:center;
+}
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
 
@@ -37,25 +100,31 @@ body {
 
 /* Carousel base class */
 .carousel {
-  height: 400px;
+  height: 300px;
   margin-bottom: 60px;
 }
 /* Since positioning the image, we need to help out the caption */
 .carousel-caption {
   z-index: 10;
+  color:#559;
+}
+
+
+.carousel-caption.right {
+    background-image:none !important;
 }
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 400px;
-  background-color: #777;
+  height: 300px;
+  background-color: transparent;
 }
 .carousel-inner > .item > img {
   position: absolute;
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 400px;
+  height: 300px;
 }
 
 

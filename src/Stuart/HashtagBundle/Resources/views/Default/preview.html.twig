@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+    <link href='/assets/css/index.css' rel='stylesheet' type='text/css'>
+    <link href='/assets/css/{{ page.theme }}.css' rel='stylesheet' type='text/css'>
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+    
+    
+</head>
+<body>
+<div id="upper-nav" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand theme1" id="brand" href="/">#sample</a>
+          <label id="theme-selector-label" for="theme">Preview Theme:</label>
+            <select name="theme" id="theme">
+                <option>Select...</option>
+                {% for theme in themes %}
+                <option value="{{ theme.id }}">{{ theme.themeName }}</option>
+                {% endfor %}
+            </select>
+          <ul class="nav navbar-nav pull-right">
+              
+              <li id="ht-control-play">
+                  <a href="javascript:void()" title="Play">
+                      <span class="glyphicon glyphicon-play"></span>
+                  </a>
+              </li>
+              
+              <li id="ht-control-pause" class="active" title="Pause">
+                  <a href="javascript:void)">
+                      <span class="glyphicon glyphicon-pause"></span>
+                  </a>
+              </li>
+              
+              <li id="ht-control-random" class="active" title="Toggle Random Mode">
+                  <a href="javascript:void()">
+                      <span class="glyphicon glyphicon-random"></span>
+                  </a>
+              </li>
+              
+              <li id="ht-control-timeline">
+                  <a href="javascript:void()" title="Toggle Timeline Mode">
+                      <span class="glyphicon glyphicon-time"></span>
+                  </a>
+              </li>
+              
+          </ul>    
+        </div>
+    </div>
+
+<div class="container">
+    <div class="row">
+        <div id="tweets" class="hidden-phone">
+            <div id="tweet0" class="tweet well twitter" style="display:block;"> 
+                <div class="user_col">
+                    <div class="tweet_author_pic">
+                        <img src="/assets/img/me.jpeg">
+                    </div>
+                    <div class="tweet_author"><a href="http://twitter/theillfatedscum">@TheIllFatedScum</a></div>
+                </div>
+                <div class="body_col">
+                    <div class="tweet_body">
+                        This is the tweet body.  RT <a href="#">@TwitterUser</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                        Pellentesque ut scelerisque sapien, a vestibulum eros. <a href="#">#sample</a> <a href="#">t.co/234sdf</a>
+                    </div>
+                    <div class="tweet_time">11 days ago</div>
+                </div>  
+                <div style="clear:both;"></div>
+                <div class="tweet_pic"></div>
+            </div>
+            <div id="tweet1" class="tweet well instagram" style="display:block;"> 
+                <div class="user_col">
+                    <div class="tweet_author_pic">
+                        <img src="/assets/img/me.jpeg">
+                    </div>
+                    <div class="tweet_author"><a href="http://twitter/theillfatedscum">stuartfeldt</a></div>
+                </div>
+                <div class="body_col">
+                    <div class="tweet_body">
+                        This is an Instagram Post. <a href="#">#sample</a> <a href="#">#LGB</a>
+                    </div>
+                    <div class="tweet_time">Just Now</div>
+                </div>  
+                <div style="clear:both;"></div>
+                <div class="tweet_pic"><img src="/assets/img/demo_insta_pic.jpg" /></div>
+            </div>
+        </div>
+    </div>
+</div>    
+       
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+<script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+<script>
+   $('#theme').change(function(){
+       window.location.href = "/preview/"+$('#theme').val();
+   }); 
+</script>
+
+</body>
+</html>
