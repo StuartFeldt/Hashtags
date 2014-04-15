@@ -55,6 +55,22 @@ stuart_hashtag_admin:
     pattern: /admin
     defaults: { _controller: StuartHashtagBundle:Admin:index, page: 1 }
     
+stuart_hashtag_admin_theme:
+    pattern: /admin/theme
+    defaults: { _controller: StuartHashtagBundle:Admin:theme, page: 1 }
+
+stuart_hashtag_admin_theme_add:
+    pattern: /admin/theme/add
+    defaults: { _controller: StuartHashtagBundle:Admin:addTheme}
+
+stuart_hashtag_admin_theme_page:
+    pattern: /admin/theme/{page}
+    defaults: { _controller: StuartHashtagBundle:Admin:theme, page: 1 }
+    
+stuart_hashtag_admin_theme_modify:
+    pattern: /admin/theme/modify/{theme}
+    defaults: { _controller: StuartHashtagBundle:Admin:modifyTheme}
+    
 stuart_hashtag_admin_page:
     pattern: /admin/{page}
     defaults: { _controller: StuartHashtagBundle:Admin:index}
