@@ -1,0 +1,31 @@
+{% extends "StuartHashtagBundle:Admin:index.html.twig" %}
+
+{% block main %}
+<h3>Themes</h3>
+<a href="/admin/theme/add" class="btn btn-default">Add Theme</a>
+<div id="paging">
+    <ul class="pagination">
+      <li><a href="/admin/theme/{{ active - 1 }}">&laquo;</a></li>
+      {% for i in 1..pages %}
+        <li {% if active==i %}class="active"{% endif %}><a href="/admin/theme/{{ i }}">{{ i }}</a></li>
+      {% endfor %}
+      <li><a href="/admin/theme/{{ active + 1 }}">&raquo;</a></li>
+    </ul>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Theme Name</th>
+            <th>Modify</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for theme in themes %}
+            <tr class="site-row">
+                <td class="theme-name">{{ theme.themeName }}</td>
+                <td class="theme-edit"><a href="/admin/theme/modify/{{ theme.id }}" class="btn btn-success">Edit Theme</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>  
+</table>
+{% endblock %}

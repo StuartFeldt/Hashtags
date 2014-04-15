@@ -14,7 +14,7 @@
 namespace Stuart\HashtagBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Stuart\HashtagBundle\Entity\Site;
+use Stuart\HashtagBundle\Entity\Theme;
 use Symfony\Component\HttpFoundation\Request;
 
 class AdminController extends Controller {
@@ -26,7 +26,8 @@ class AdminController extends Controller {
         "site" => 'site',
         "theme" => 'theme',
         "description" => 'Adminster',
-        "heading" => 'Admin Panel'
+        "heading" => 'Admin Panel',
+        'nav' => 'home'
     );
     
     public function indexAction($page) {
@@ -58,6 +59,20 @@ class AdminController extends Controller {
         $tweets =  $this->getDoctrine()->getRepository('StuartHashtagBundle:Tweet')->findBy(array("siteId" => $sub), null, 10, ($page-1)*10);
         
         return $this->render('StuartHashtagBundle:Admin:subdomain.html.twig', array('sub' => $sub, 'page' => $this->page, 'tweets' => $tweets, 'pages' => $pages, 'active' => $page));
+    }
+    
+    public function themeAction($page) {
+        $entityManager = $this->getDoctrine()->getManager();
+        $qb = $entityManager->createQueryBuilder();
+        $qb->select('count(theme.id)');
+        $qb->from('StuartHashtagBundle:Theme','theme');
+
+        $count = $qb->getQuery()->getSingleScalarResult();
+        $pages = ceil($count/10);
+        
+        $themes =  $this->getDoctrine()->getRepository('StuartHashtagBundle:Theme')->findBy(array(), null, 10, ($page-1)*10);
+        $this->page["nav"] = "theme";
+        return $this->render('StuartHashtagBundle:Admin:themes.html.twig', array('page' => $this->page, 'themes' => $themes, 'pages' => $pages, 'active' => $page));
     }
     
     public function modifySiteAction($site, Request $request) {
@@ -141,6 +156,38 @@ class AdminController extends Controller {
         $this->getDoctrine()->getManager()->remove($site);
         $this->getDoctrine()->getManager()->flush();
         return $this->indexAction(1);
+    }
+    
+    public function addThemeAction(Request $request) {
+        $theme = new Theme();
+        //$theme->setClass("CssName");
+        //$theme->setThemeName("Theme Name");
+        
+        $form = $this->createFormBuilder($theme)
+            ->add('themeName', 'text')
+            ->add('css', 'textarea')
+            ->add('save', 'submit')
+            ->getForm();
+        
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            // perform some action, such as saving the task to the database
+            $tweet = $form->getData();
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($tweet);
+            $em->flush();        
+            
+            return $this->themeAction(1);
+        }
+        
+        $this->page["nav"] = "theme";
+        return $this->render('StuartHashtagBundle:Admin:addTheme.html.twig', array(
+            'page' => $this->page,
+            'form' => $form->createView(),
+            'request' => $request
+        ));
+        
     }
     
 }

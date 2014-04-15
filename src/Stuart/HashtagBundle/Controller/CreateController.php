@@ -68,9 +68,9 @@ class CreateController extends Controller {
             $em->persist($site);
             $em->flush();
             
-           /* return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
+           return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
                 'name'  => $site->getSubdomain()
-            ), true));*/
+            ), true));
 
         }
         

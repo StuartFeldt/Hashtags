@@ -44,6 +44,7 @@ class DefaultController extends Controller
                 "background" => $site->getBackgroundImage() == "" ? -1 : $site->getBackgroundImage(),
                 "site" => $site->getId(),
                 "theme" => $theme != "" ? $theme->getClass() : "empty",
+                "css" => $theme != "" ? $theme->getCss() : "",
                 "description" => "create",
                 "heading" => "Create a hashtag"
             );

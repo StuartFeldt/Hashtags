@@ -31,7 +31,8 @@
         <div class="container">
           <nav class="blog-nav">
             {% block navlinks %}
-            <a href="/admin" class="blog-nav-item active">Admin Home</a>
+            <a href="/admin" class="blog-nav-item {% if page.nav == "home" %}active{% endif %}">Admin Home</a>
+            <a href="/admin/theme" class="blog-nav-item {% if page.nav == "theme" %}active{% endif %}">Themes</a>
             {% endblock %}
           </nav>
         </div>

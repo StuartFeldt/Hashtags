@@ -34,6 +34,13 @@ class Theme
      * @ORM\Column(name="class", type="string", length=45)
      */
     private $class;
+   
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="css", type="string", length=5000)
+     */
+    private $css;
 
 
     /**
@@ -90,5 +97,28 @@ class Theme
     public function getClass()
     {
         return $this->class;
+    }
+    
+    /**
+     * Set css
+     *
+     * @param string $css
+     * @return Theme
+     */
+    public function setCss($css)
+    {
+        $this->css = $css;
+
+        return $this;
+    }
+
+    /**
+     * Get css
+     *
+     * @return string 
+     */
+    public function getCss()
+    {
+        return $this->css;
     }
 }
