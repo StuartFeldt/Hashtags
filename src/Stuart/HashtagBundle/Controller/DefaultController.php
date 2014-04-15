@@ -28,6 +28,9 @@ class DefaultController extends Controller
     
     public function viewAction($name)
     {
+        if($name == "dev") {
+            return $this->indexAction();
+        }
         $site = $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($name);
         
         $theme = "";

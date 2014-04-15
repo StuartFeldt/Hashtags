@@ -50,3 +50,35 @@ stuart_hashtag_getInsta:
 stuart_hashtag_preview:
     pattern: /preview/{themeId}
     defaults: { _controller: StuartHashtagBundle:Default:preview }
+    
+stuart_hashtag_admin:
+    pattern: /admin
+    defaults: { _controller: StuartHashtagBundle:Admin:index, page: 1 }
+    
+stuart_hashtag_admin_page:
+    pattern: /admin/{page}
+    defaults: { _controller: StuartHashtagBundle:Admin:index}
+    
+stuart_hashtag_admin_tweets:
+    pattern: /admin/tweets/{sub}
+    defaults: { _controller: StuartHashtagBundle:Admin:subdomain, page: 1}
+    
+stuart_hashtag_admin_tweets_page:
+    pattern: /admin/tweets/{sub}/{page}
+    defaults: { _controller: StuartHashtagBundle:Admin:subdomain}
+ 
+stuart_hashtag_admin_delete_tweet:
+    pattern: /admin/tweet/delete/{tweet}
+    defaults: { _controller: StuartHashtagBundle:Admin:deleteTweet}
+    
+stuart_hashtag_admin_delete_site:
+    pattern: /admin/delete/{site}
+    defaults: { _controller: StuartHashtagBundle:Admin:deleteSite}
+
+stuart_hashtag_admin_modify_site:
+    pattern: /admin/modify/{site}
+    defaults: { _controller: StuartHashtagBundle:Admin:modifySite}
+    
+stuart_hashtag_admin_modify_tweet:
+    pattern: /admin/tweet/modify/{tweet}
+    defaults: { _controller: StuartHashtagBundle:Admin:modifyTweet}

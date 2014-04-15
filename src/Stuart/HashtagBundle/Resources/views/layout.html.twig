@@ -15,7 +15,9 @@
 
     <!-- Custom styles for this template -->
     <link href="/assets/css/blog.css" rel="stylesheet">
-<link href="/assets/css/navigation.css" rel="stylesheet">
+    <link href="/assets/css/navigation.css" rel="stylesheet">
+    
+    {% block extracss %} {% endblock %}
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -35,7 +37,7 @@
       </div>
 
       <div class="row">
-
+          {% block blogpage %}
         <div class="col-sm-8 blog-main">
            {% block main %}
                 
@@ -70,7 +72,7 @@
             </ol>
           </div>
         </div><!-- /.blog-sidebar -->
-
+        {% endblock %}
       </div><!-- /.row -->
 
     </div><!-- /.container -->
