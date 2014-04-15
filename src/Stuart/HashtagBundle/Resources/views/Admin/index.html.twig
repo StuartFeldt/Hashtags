@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="/favicon.ico">
+
+    <title>{{ page.title }}</title>
+    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap core CSS -->
+    <link href="/assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/assets/css/blog.css" rel="stylesheet">
+    <link href="/assets/css/navigation.css" rel="stylesheet">
+    <link href="/assets/css/admin.css" rel="stylesheet">
+    {% block extracss %}{% endblock %}
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="blog-masthead">
+        <div class="container">
+          <nav class="blog-nav">
+            {% block navlinks %}
+            <a href="/admin" class="blog-nav-item active">Admin Home</a>
+            {% endblock %}
+          </nav>
+        </div>
+    </div>
+      
+    <div class="container">
+      <div class="row">
+    {% block main %}
+    <div id="paging">
+        <ul class="pagination">
+          <li><a href="#">&laquo;</a></li>
+          {% for i in 1..pages %}
+            <li {% if active==i %}class="active"{% endif %}><a href="/admin/{{ i }}">{{ i }}</a></li>
+          {% endfor %}
+          <li><a href="#">&raquo;</a></li>
+        </ul>
+    </div>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Site</th>
+                <th>Background</th>
+                <th>Hashtag</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Tweets</th>
+                <th>Modify</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for site in sites %}
+                <tr class="site-row">
+                    <td class="site-sub"><a target="_new" href="/view/{{ site.subdomain }}">{{ site.name }}</a></td>
+                    <td class="site-bg"><a target="_new" href="/assets/img/{{ site.backgroundImage }}">{{ site.backgroundImage }}</a></td>
+                    <td class="site-hash">{{ site.hashtag }}</td>
+                    <td class="site-start">{{ site.startDate|date('Y-m-d') }}</td>
+                    <td class="site-end">{{ site.endDate|date('Y-m-d') }}</td>
+                    <td class="site-tweets"><a href="/admin/tweets/{{ site.id }}" class="btn btn-success">Get Tweets</a></td>
+                    <td class="site-edit"><a href="/admin/modify/{{ site.id }}" class="btn btn-success">Edit Info</a></td>
+                    <td class="tweet-delete"><a href="/admin/delete/{{ site.id }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>  
+    </table>
+    {% endblock %}
+      </div><!-- /.row -->
+
+    </div><!-- /.container -->
+
+    <div class="blog-footer">
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </div>
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.js"></script>
+    <script src="/assets/js/docs.min.js"></script>
+    <script>
+        Holder.add_theme("Good", {background:"#ECF3F3", foreground:"#A5AAAA", size:75, font: "Monaco", fontweight:"normal"});
+        Holder.add_theme("Better", {background:"#5bc0de", foreground:"#eee", size:75, font: "Monaco", fontweight:"normal"});
+        Holder.add_theme("Best", {background:"#5cb85c", foreground:"#eee", size:75, font: "Monaco", fontweight:"normal"});
+    </script>
+    {% block extrascript %}{% endblock %}
+  </body>
+</html>
+
+
