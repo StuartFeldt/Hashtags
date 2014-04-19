@@ -21,7 +21,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "jublonet/codebird-php": "2.4.0",
         "php-instagram-api/php-instagram-api": "dev-master",
-        "cboden/Ratchet": "0.3.*"
+        "cboden/Ratchet": "0.3.*",
+        "react/zmq": "0.2.*"
     },
     "scripts": {
         "post-install-cmd": [

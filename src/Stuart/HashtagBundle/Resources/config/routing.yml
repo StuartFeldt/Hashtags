@@ -20,7 +20,7 @@ stuart_hashtag_plus:
     defaults: { _controller: StuartHashtagBundle:Create:plus }
   
 stuart_hashtag_professional:
-    pattern:  /create/professional
+    pattern:  /create/premium
     defaults: { _controller: StuartHashtagBundle:Create:professional }
     
 stuart_hashtag_view:

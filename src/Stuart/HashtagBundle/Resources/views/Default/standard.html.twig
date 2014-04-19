@@ -1,66 +1,41 @@
 {% extends "StuartHashtagBundle:Default:create.html.twig" %}
 
 {% block main %}
-<form role="form" method="post">
-  
+
   {% if messages != 0 %}
     <div class="alert alert-danger alert-dismissable">{{ messages.error }}</div>
   {% endif %}
-  
-        <div class="form-group">
-    <label for="hashtag">Hashtag</label>
-    <input type="text" class="form-control" name="hashtag" id="hashtag" placeholder="Enter hashtag">
-  </div>
-  <div class="form-group">
-    <label for="name">Hashtag Thing Name</label>
-    <input type="text" class="form-control" name="name" id="name" placeholder="Enter Name">
-  </div>
-  <div class="form-group">
-    <label for="subdomain">Subdomain</label>
-    <input type="text" class="form-control" name="subdomain" id="subdomain" placeholder="Enter Subdomain">
-  </div>
-    
-   <div class="form-group">
-    <label for="start">Start Date:</label>
-    <input type="date" class="form-control" name="start" id="start">
-  </div> 
- 
-  <div class="form-group">
-    <label for="stop">Stop Date:</label>
-    <input type="text" class="form-control" name="stop" readonly id="stop">
-  </div>   
-    
-  <div class="form-group">
-    <label for="theme">Theme</label>
-    <select name="theme" class="form-control" id="theme">
-        {% for theme in themes %}
-        <option value="{{ theme.id }}">{{ theme.themeName }}</option>
-        {% endfor %}
-    </select>
-    <a id="prev-link" target="_new" href="/preview/1">Preview Theme</a>
-  </div>
-  
-  <div class="form-group">
-    <label for="bg">Background Image</label>
-    <input type="file" id="bg" name="bg" />
-  </div>      
-  
-  <div class="checkbox">
-    <label>
-      <input type="checkbox"> <a href="#">{% block profanity %}{% endblock %}Profanity Filter</a>
-    </label>
-  </div>
-  {% block plus %}{% endblock %}
-  {% block pro %}{% endblock %} 
-  <button type="submit" class="btn btn-default">Submit</button>
-</form>          
 
+{{ form_start(form) }}
+  
+  <div class="form-group">
+    {{form_label(form.hashtag)}}
+    {{ form_widget(form.hashtag, {'attr': {'class': 'form-control', 'placeholder': 'Enter Hashtag'}}) }}
+  </div>
+  <div class="form-group">
+    {{form_label(form.name)}}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Enter Name'}}) }}
+  </div>
+  <div class="form-group">
+    {{form_label(form.subdomain)}}
+    {{ form_widget(form.subdomain, {'attr': {'class': 'form-control', 'placeholder': 'Enter Subdomain'}}) }}
+  </div>
+  <div class="form-group">
+    {{form_label(form.startDate)}}
+    {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+  </div>
+  <div class="form-group">
+    {{form_label(form.file)}}
+    {{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
+  </div>
+   <div class="form-group">
+    {{form_label(form.themeId)}}
+    {{ form_widget(form.themeId) }}
+       <p class="small"><a id="prev-link" target="_new" href="/preview/1">Preview Themes</a></p>
+   </div>
+  {{ form_widget(form.create, {'attr': {'class': 'btn btn-default'}}) }}
+{{ form_end(form) }}
 {% endblock %}
 {% block extrascript %}
-<script>
-    $('#theme').change(function(){
-        $('#prev-link').attr('href', '/preview/'+$('#theme').val());
-    });
-</script>
-<script src="/assets/js/form_help.js" />
+
 {% endblock %}
