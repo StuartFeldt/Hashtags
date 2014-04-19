@@ -57,6 +57,7 @@ class CreateController extends Controller {
         $themeChoices = array('choices' => $themeList);
         
         $site = new Site();
+        $site->setStartDate(new \DateTime());
         $form = $this->createFormBuilder($site)
                 ->add('name')
                 ->add('subdomain')
