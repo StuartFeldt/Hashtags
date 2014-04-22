@@ -39,6 +39,12 @@
   {{ form_widget(form.create, {'attr': {'class': 'btn btn-default'}}) }}
 {{ form_end(form) }}
 {% endblock %}
+  
+{% block options %}
+    <h4>Want More Options?</h4>
+    <p>Try the <a href="/create/plus">Standard+</a> or <a href="/create/premium">Premium</a> options for blocking usernames, blocking profanity, and additional hashtag </p>
+{% endblock %}
+  
 {% block extrascript %}
 <script>
 $(document).ready(function(){
