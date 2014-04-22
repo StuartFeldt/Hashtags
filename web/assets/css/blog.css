@@ -60,7 +60,7 @@ h6, .h6 {
 /* Sidebar modules for boxing content */
 .sidebar-module {
   padding: 15px;
-  margin: 0 -15px 15px;
+  margin: 20px 0 0;
 }
 .sidebar-module-inset {
   padding: 15px;
@@ -110,6 +110,7 @@ h6, .h6 {
  */
 
 .blog-footer {
+  margin-top:30px;
   padding: 40px 0;
   color: #999;
   text-align: center;

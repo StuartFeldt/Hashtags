@@ -17,7 +17,7 @@ class DefaultController extends Controller
         "background" => 'background',
         "site" => 'site',
         "theme" => 'theme',
-        "description" => 'home',
+        "description" => 'description',
         "heading" => 'heading'
     );
     

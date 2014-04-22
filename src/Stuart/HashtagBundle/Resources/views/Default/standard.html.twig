@@ -1,7 +1,6 @@
 {% extends "StuartHashtagBundle:Default:create.html.twig" %}
 
 {% block main %}
-
   {% if messages != 0 %}
     <div class="alert alert-danger alert-dismissable">{{ messages.error }}</div>
   {% endif %}
@@ -14,28 +13,103 @@
   </div>
   <div class="form-group">
     {{form_label(form.name)}}
-    {{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Enter Name'}}) }}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Name'}}) }}
   </div>
   <div class="form-group">
     {{form_label(form.subdomain)}}
-    {{ form_widget(form.subdomain, {'attr': {'class': 'form-control', 'placeholder': 'Enter Subdomain'}}) }}
+    {{ form_widget(form.subdomain, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Subdomain'}}) }}
   </div>
   <div class="form-group">
     {{form_label(form.startDate)}}
-    {{ form_widget(form.startDate, {'attr': {'class': 'form-control'}}) }}
+    {{ form_widget(form.startDate, {'attr': {'class': 'form-control not-hashtag'}}) }}
   </div>
   <div class="form-group">
     {{form_label(form.file)}}
-    {{ form_widget(form.file, {'attr': {'class': 'form-control'}}) }}
+    {{ form_widget(form.file, {'attr': {'class': 'form-control not-hashtag'}}) }}
   </div>
    <div class="form-group">
     {{form_label(form.themeId)}}
-    {{ form_widget(form.themeId) }}
+    {{ form_widget(form.themeId, {'attr': {'class': 'form-control not-hashtag'}}) }}
        <p class="small"><a id="prev-link" target="_new" href="/preview/1">Preview Themes</a></p>
+   </div>
+    <div class="form-group">
+    {{form_label(form.password)}}
+    {{ form_widget(form.password, {'attr': {'class': 'form-control not-hashtag'}}) }}
    </div>
   {{ form_widget(form.create, {'attr': {'class': 'btn btn-default'}}) }}
 {{ form_end(form) }}
 {% endblock %}
 {% block extrascript %}
+<script>
+$(document).ready(function(){
+var hashtagOpts = {
+    title: "Hashtag",
+    html: true,
+    content: "<b>Start Here!</b> <p><span class='label label-primary'>Required</span> This will be the hashtag Tweets & Instagram posts will be pulled by.</p>",
+    container: "body",
+    trigger: 'hover'
+};
 
+var nameOpts = {
+    title: "Event Name",
+    html: true,
+    content: "<span class='label label-primary'>Required</span> This will be the name for your site.  It is shown in the page title.",
+    container: "body",
+    trigger: 'hover'
+};
+
+var subdomainOpts = {
+    title: "Subdomain",
+    html: true,
+    content: "<span class='label label-primary'>Required</span> The subdomain is how your event will be accessed.  For example, if myevent was entered here, your site can be found at http://myevent.hashtagmyevent.com",
+    container: "body",
+    trigger: 'hover'
+};
+
+var dateOpts = {
+    title: "Event Start Date",
+    html: true,
+    content: "<span class='label label-primary'>Required</span> This will be the date the event becomes active. For standard packages, the end date is 2 weeks after the start date.",
+    container: "body",
+    trigger: 'hover'
+};
+
+var fileOpts = {
+    title: "Custom Background",
+    html: true,
+    content: "<span class='label label-default'>Optional</span> You may specify a custom background.",
+    container: "body",
+    trigger: 'hover'
+};
+
+var themeOpts = {
+    title: "Choose a theme",
+    html: true,
+    content: "<span class='label label-primary'>Required</span> Preview themes by clicking 'Preview Themes'",
+    container: "body",
+    trigger: 'hover'
+};
+
+var passOpts = {
+    title: "Specify a password",
+    html: true,
+    content: "<span class='label label-primary'>Required</span> Specify a password to be able to modify site options.",
+    container: "body",
+    trigger: 'hover'
+};
+
+    $('#form_hashtag').popover(hashtagOpts);
+    $('#form_subdomain').popover(subdomainOpts);
+    $('#form_name').popover(nameOpts);
+    $('#form_startDate').popover(dateOpts);
+    $('#form_file').popover(fileOpts);
+    $('#form_themeId').popover(themeOpts);
+    $('#form_password').popover(passOpts);
+    $('#form_hashtag').popover('show');
+    $('.not-hashtag').hover( function(){
+        $('#form_hashtag').popover('hide');
+    });
+});
+</script>
+    
 {% endblock %}
