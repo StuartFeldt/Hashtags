@@ -133,17 +133,19 @@ class CreateController extends Controller {
         return $this->render('StuartHashtagBundle:Default:professional.html.twig', array('page' => $page, 'themes' => $this->getThemes()));
     }
     
-    public function adminSiteAction($name, Request $request, $auth) {
+    public function adminSiteAction($name, Request $request) {
         
         if($name == "dev") {
             return $this->adminHomeAction($request);
         }
+
+        //get the specified site
+        $site = $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($name);
         
-        if(!$auth) {
+        //check authed
+        if($this->getRequest()->getSession()->get("auth") != sha1($site->getId().$site->getPassword())) {
             return $this->adminHomeAction($request);
         }
-        
-        $site = $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($name);
         
         //Gen theme choices
         $themes = $this->getThemes();
@@ -174,7 +176,7 @@ class CreateController extends Controller {
                 'name'  => $site->getSubdomain()
             ), true));
         }
-
+        
         $this->page["heading"] = $site->getName();
         $this->page["title"] = $site->getName()." Admin Panel";
         $this->page["sub"] = $site->getSubdomain();
@@ -203,8 +205,6 @@ class CreateController extends Controller {
             //get site by subdomain
             $site = $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($request->get("sub"));
             
-            //$session = $this->getRequest()->getSession();
-            
             //sha1 password to see if it matches
             if(!$site) {
                 
@@ -214,13 +214,17 @@ class CreateController extends Controller {
                 
             } else if(sha1($request->get("pass")) == $site->getPassword()) {
                 
+                //password is correct
+                $session = $this->getRequest()->getSession();
+                $session->set("auth", sha1($site->getId().$site->getPassword()));
+                
                 //DEV ONLY
                 if($this->container->get( 'kernel' )->getEnvironment() == "dev") {
-                    return $this->adminSiteAction($request->get("sub"), $request, true);
+                    return $this->adminSiteAction($request->get("sub"), $request);
                 }
                 
                 //PRODUCTION
-                return $this->adminSiteAction($request->get("sub"), $request, true);
+                return $this->adminSiteAction($request->get("sub"), $request);
                         
             } else {
                 
