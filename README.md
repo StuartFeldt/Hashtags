@@ -9,5 +9,3 @@ v0.0.8
 * Consistent design for entire site
 * Package Generation
 * Social Integrations with as many sites as possible
-
-
