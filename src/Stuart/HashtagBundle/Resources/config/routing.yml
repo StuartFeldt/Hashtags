@@ -5,12 +5,12 @@ stuart_hashtag_view_sub:
 
 stuart_hashtag_admin_site_dev:
     pattern: /view/{name}/modify
-    defaults: { _controller: StuartHashtagBundle:Create:adminSite, auth: false}
+    defaults: { _controller: StuartHashtagBundle:Create:adminSite}
 
 stuart_hashtag_admin_site:
     pattern: /modify
     host: "{name}.hashtagmyevent.com"
-    defaults: { _controller: StuartHashtagBundle:Create:adminSite, auth: false}
+    defaults: { _controller: StuartHashtagBundle:Create:adminSite}
     
 stuart_hashtag_admin_site_home:
     pattern: /modify
