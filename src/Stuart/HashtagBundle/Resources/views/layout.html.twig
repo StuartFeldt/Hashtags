@@ -37,9 +37,11 @@
       </div>
         <div class="col-sm-4 blog-sidebar">
         <div class="sidebar-module sidebar-module-inset">
-            <h4>Want More Options?</h4>
-            <p>Try the <a href="/create/plus">Standard+</a> or <a href="/create/premium">Premium</a> options for blocking usernames, blocking profanity, and additional hashtag </p>
-          </div> 
+            {% block options %}
+                <h4>Want More Options?</h4>
+                <p>Try the <a href="/create/plus">Standard+</a> or <a href="/create/premium">Premium</a> options for blocking usernames, blocking profanity, and additional hashtag </p>
+            {% endblock %}
+            </div> 
                 </div>
                 </div>
             

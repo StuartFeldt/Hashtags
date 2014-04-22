@@ -1,0 +1,23 @@
+{% extends "StuartHashtagBundle:Default:create.html.twig" %}
+{% block main %}
+
+  {% if messages != 0 %}
+    <div class="alert alert-danger alert-dismissable">{{ messages.error }}</div>
+  {% endif %}
+    
+<form role="form" method="POST">
+  <div class="form-group">
+    <label for="sub">Subdomain</label>
+    <input type="text" class="form-control" name="sub" id="sub" placeholder="Enter subdomain">
+  </div>
+  <div class="form-group">
+    <label for="pass">Password</label>
+    <input type="password" class="form-control" name="pass" id="pass" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+{% endblock %}
+
+{% block options %}
+Enter your subdomain with your supplied password to modify a site.
+{% endblock %}

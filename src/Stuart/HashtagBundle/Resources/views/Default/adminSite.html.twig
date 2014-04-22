@@ -1,0 +1,44 @@
+{% extends "StuartHashtagBundle:Default:create.html.twig" %}
+
+{% block main %}
+
+{{ form_start(form) }}
+  <p class="small"><a href="http://{{ page.sub }}.hashtagmyevent.com">View your event</a>
+  <div class="form-group">
+    {{form_label(form.hashtag)}}
+    {{ form_widget(form.hashtag, {'attr': {'class': 'form-control', 'placeholder': 'Enter Hashtag'}}) }}
+  </div>
+  <div class="form-group">
+    {{form_label(form.name)}}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Name'}}) }}
+  </div>
+  <div class="form-group">
+    <label for="form_file">Background Image</label>
+    <p class="small"><a href="{{ page.bgimg }}" target="_new">View Current</a></p>
+    {{ form_widget(form.file, {'attr': {'class': 'form-control not-hashtag'}}) }}
+  </div>
+   <div class="form-group">
+    {{form_label(form.themeId)}}
+    {{ form_widget(form.themeId, {'attr': {'class': 'form-control not-hashtag'}}) }}
+       <p class="small"><a id="prev-link" target="_new" href="/preview/1">Preview Themes</a></p>
+   </div>
+    <div class="form-group">
+        <label for="sub">Subdomain</label>
+        <input type="text" class="form-control" id="sub" value="{{ page.sub }}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="start">Start Date</label>
+        <input type="text" class="form-control" id="start" value="{{ page.startDate }}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="end">End Date</label>
+        <input type="text" class="form-control" id="end" value="{{ page.endDate }}" readonly>
+    </div>
+  {{ form_widget(form.update, {'attr': {'class': 'btn btn-default'}}) }}
+{{ form_end(form) }}
+  
+{% endblock %}
+
+{% block options %}
+Administer your site options here.
+{% endblock %}

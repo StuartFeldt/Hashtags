@@ -16,11 +16,20 @@ namespace Stuart\HashtagBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Stuart\HashtagBundle\Entity\Site;
-use Stuart\HashtagBundle\Entity\Background;
+
 
 class CreateController extends Controller {
-    
+
     public $debug = 0;
+    public $page = array(
+        "title" => 'title',
+        "hashtag" => 'hashtag',
+        "background" => 'background',
+        "site" => 'site',
+        "theme" => 'theme',
+        "description" => 'description',
+        "heading" => 'heading'
+    );
     
     public function createAction(Request $request)
     {
@@ -65,6 +74,7 @@ class CreateController extends Controller {
                 ->add('startDate', 'date')
                 ->add('themeId', 'choice', $themeChoices)
                 ->add('file')
+                ->add('password', 'password')
                 ->add('create', 'submit')
                 ->getForm();
         
@@ -85,12 +95,13 @@ class CreateController extends Controller {
             
             $em = $this->getDoctrine()->getManager();
             
+            $site->sha1Pass();
             $site->upload();
 
             $em->persist($site);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
+            return $this->redirect($this->generateUrl('stuart_hashtag_admin_site', array(
                 'name'  => $site->getSubdomain()
             ), true));
         }
@@ -122,6 +133,107 @@ class CreateController extends Controller {
         return $this->render('StuartHashtagBundle:Default:professional.html.twig', array('page' => $page, 'themes' => $this->getThemes()));
     }
     
+    public function adminSiteAction($name, Request $request, $auth) {
+        
+        if($name == "dev") {
+            return $this->adminHomeAction($request);
+        }
+        
+        if(!$auth) {
+            return $this->adminHomeAction($request);
+        }
+        
+        $site = $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($name);
+        
+        //Gen theme choices
+        $themes = $this->getThemes();
+        $themeList = array();
+        foreach($themes as $theme) {
+            $themeList[$theme["id"]] = $theme["themeName"];
+        }
+        $themeChoices = array('choices' => $themeList);
+        
+        $form = $this->createFormBuilder($site)
+            ->add('name')
+            ->add('hashtag')
+            ->add('themeId', 'choice', $themeChoices)
+            ->add('file')
+            ->add('update', 'submit')
+            ->getForm();
+        
+        $form->handleRequest($request);
+        if ($form->isValid()) {
+            // perform some action, such as saving the task to the database
+            $site = $form->getData();
+            
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($site);
+            $em->flush();        
+            
+            return $this->redirect($this->generateUrl('stuart_hashtag_view_sub', array(
+                'name'  => $site->getSubdomain()
+            ), true));
+        }
+
+        $this->page["heading"] = $site->getName();
+        $this->page["title"] = $site->getName()." Admin Panel";
+        $this->page["sub"] = $site->getSubdomain();
+        $this->page["startDate"] = $site->getStartDate()->format('Y-m-d');
+        $this->page["endDate"] = $site->getEndDate()->format('Y-m-d');
+        $this->page["description"] = "Admin Panel";
+        $this->page["bgimg"] = "/assets/img/".$site->getBackgroundImage();
+        
+        return $this->render('StuartHashtagBundle:Default:adminSite.html.twig', array(
+            'page' => $this->page,
+            'form' => $form->createView(),
+            'request' => $request
+        ));
+    }
+    
+    public function adminHomeAction(Request $request) {
+        
+        $this->page["heading"] = "Admin Panel";
+        $this->page["title"] = "Admin Panel";
+        $this->page["description"] = "Enter a subdomain and password to continue.";
+        $logger = $this->get('logger');
+        
+        //check both subdomain and password have been filled
+        if($request->get("sub") != "" && $request->get("pass") != "") {
+            
+            //get site by subdomain
+            $site = $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($request->get("sub"));
+            
+            //$session = $this->getRequest()->getSession();
+            
+            //sha1 password to see if it matches
+            if(!$site) {
+                
+                //subdomain is incorrect
+                $message = array("error" => "Password or subdomain is incorrect");
+                return $this->render('StuartHashtagBundle:Default:adminHome.html.twig', array('page' => $this->page, 'messages' => $message));
+                
+            } else if(sha1($request->get("pass")) == $site->getPassword()) {
+                
+                //DEV ONLY
+                if($this->container->get( 'kernel' )->getEnvironment() == "dev") {
+                    return $this->adminSiteAction($request->get("sub"), $request, true);
+                }
+                
+                //PRODUCTION
+                return $this->adminSiteAction($request->get("sub"), $request, true);
+                        
+            } else {
+                
+                //password is incorrect
+                $message = array("error" => "Password or subdomain is incorrect");
+                return $this->render('StuartHashtagBundle:Default:adminHome.html.twig', array('page' => $this->page, 'messages' => $message));
+                
+            }
+        } 
+        
+        return $this->render('StuartHashtagBundle:Default:adminHome.html.twig', array('page' => $this->page, 'messages' => 0));
+    }
+    
     function getThemes() {
         $themes = $this->getDoctrine()->getRepository('StuartHashtagBundle:Theme')->findAll();
         
@@ -140,6 +252,8 @@ class CreateController extends Controller {
     function verifySubdomain($subdomain) {
         return $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($subdomain);    
     }
+    
+    
     
 }
 

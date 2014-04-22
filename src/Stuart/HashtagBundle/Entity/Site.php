@@ -5,6 +5,7 @@ namespace Stuart\HashtagBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Site
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table()
  * @ORM\Entity
  */
-class Site
+class Site implements UserInterface, \Serializable
 {
     /**
      * @var integer
@@ -22,7 +23,7 @@ class Site
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
+    
     /**
      * @var string
      *
@@ -50,6 +51,14 @@ class Site
      * @ORM\Column(name="hashtag", type="string", length=255)
      */
     private $hashtag;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="string", length=160)
+     */
+    private $password;
+
 
     /**
      * @var \DateTime
@@ -77,6 +86,28 @@ class Site
      */
     private $file;
 
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    
+    
+    
+    
+    
+    
+    public function __construct()
+    {
+        $this->isActive = true;
+        // may not be needed, see section on salt below
+        // $this->salt = md5(uniqid(null, true));
+    }
+    
+    
+    
+    
+    
     /**
      * Sets file.
      *
@@ -197,6 +228,29 @@ class Site
     public function getHashtag()
     {
         return $this->hashtag;
+    }
+    
+    /**
+     * Set password
+     *
+     * @param string $password
+     * @return Site
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
+     * Get password
+     *
+     * @return string 
+     */
+    public function getPassword()
+    {
+        return $this->password;
     }
 
     /**
@@ -319,5 +373,60 @@ class Site
 
         // clean up the file property as you won't need it anymore
         $this->file = null;
+    }
+    
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USER');
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->subdomain,
+            $this->password,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    public function sha1Pass() {
+        $this->password = sha1($this->password);
+        return true;
+    }
+    
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->subdomain,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
+    
+    public function getSalt() {
+        
+    }
+    public function getUsername() {
+        
     }
 }

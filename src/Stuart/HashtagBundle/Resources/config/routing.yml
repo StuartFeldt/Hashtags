@@ -2,6 +2,19 @@ stuart_hashtag_view_sub:
     pattern: /
     host: "{name}.hashtagmyevent.com"
     defaults: { _controller: StuartHashtagBundle:Default:view }  
+
+stuart_hashtag_admin_site_dev:
+    pattern: /view/{name}/modify
+    defaults: { _controller: StuartHashtagBundle:Create:adminSite, auth: false}
+
+stuart_hashtag_admin_site:
+    pattern: /modify
+    host: "{name}.hashtagmyevent.com"
+    defaults: { _controller: StuartHashtagBundle:Create:adminSite, auth: false}
+    
+stuart_hashtag_admin_site_home:
+    pattern: /modify
+    defaults: { _controller: StuartHashtagBundle:Create:adminHome}
     
 stuart_hashtag_homepage:
     pattern:  /
@@ -98,3 +111,4 @@ stuart_hashtag_admin_modify_site:
 stuart_hashtag_admin_modify_tweet:
     pattern: /admin/tweet/modify/{tweet}
     defaults: { _controller: StuartHashtagBundle:Admin:modifyTweet}
+    
