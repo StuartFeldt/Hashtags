@@ -17,6 +17,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Stuart\HashtagBundle\Entity\Site;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Stuart\HashtagBundle\Entity\Filter;
+use Stuart\HashtagBundle\Entity\SiteFilter;
 
 class CreateController extends Controller {
 
@@ -55,30 +57,8 @@ class CreateController extends Controller {
             "heading" => "Hashtag your event",
             "description" => 'Standard'
             );
-       
         
-        //Gen theme choices
-        $themes = $this->getThemes();
-        $themeList = array();
-        foreach($themes as $theme) {
-            $themeList[$theme["id"]] = $theme["themeName"];
-        }
-        $themeChoices = array('choices' => $themeList);
-        
-        $site = new Site();
-        $site->setStartDate(new \DateTime());
-        $form = $this->createFormBuilder($site)
-                ->add('name')
-                ->add('subdomain')
-                ->add('hashtag')
-                ->add('startDate', 'date')
-                ->add('themeId', 'choice', $themeChoices)
-                ->add('file', null, array("required" => false))
-                ->add('password', 'password', array("required" => false))
-                ->add('create', 'submit')
-                ->getForm();
-        
-        
+        $form = $this->generateForm();
         $form->handleRequest($request);
         
         if ($form->isValid()) {
@@ -101,7 +81,7 @@ class CreateController extends Controller {
             $em->persist($site);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
+            return $this->redirect($this->generateUrl('stuart_hashtag_view_sub', array(
                 'name'  => $site->getSubdomain()
             ), true));
         }
@@ -111,39 +91,19 @@ class CreateController extends Controller {
     
     public function plusAction(Request $request)
     {
-        //set page vars
         $messages = 0;
+        $params = 0;
+        //set page vars
         $page = array(
             "title" => 'Create a hashtag', 
             "heading" => "Hashtag your event",
             "description" => 'Standard+'
             );
         
-        //Gen theme choices
-        $themes = $this->getThemes();
-        $themeList = array();
-        foreach($themes as $theme) {
-            $themeList[$theme["id"]] = $theme["themeName"];
-        }
-        $themeChoices = array('choices' => $themeList);
-        
-        $site = new Site();
-        $site->setStartDate(new \DateTime());
-        $form = $this->createFormBuilder($site)
-                ->add('name')
-                ->add('subdomain')
-                ->add('hashtag')
-                ->add('startDate', 'date')
-                ->add('themeId', 'choice', $themeChoices)
-                ->add('file')
-                ->add('password', 'password')
-                ->add('create', 'submit')
-                ->getForm();
-        
-        
+        $form = $this->generateForm();
         $form->handleRequest($request);
         
-         if ($form->isValid()) {
+        if ($form->isValid()) {
             $site = $form->getData();
             
             if($this->verifySubdomain($site->getSubdomain())) {
@@ -152,7 +112,7 @@ class CreateController extends Controller {
             }
             
             $endDate = new \DateTime($site->getStartDate()->format('Y-m-d H:i:s'));
-            $endDate->add(new \DateInterval("P14D"));        
+            $endDate->add(new \DateInterval("P1M"));        
             $site->setEndDate($endDate);
             
             $em = $this->getDoctrine()->getManager();
@@ -162,12 +122,34 @@ class CreateController extends Controller {
 
             $em->persist($site);
             $em->flush();
+            
+            $bu[0] = $request->get("blockedUsers1");
+            $bu[1] = $request->get("blockedUsers2");
+            $bu[2] = $request->get("blockedUsers3");
+            $bu[3] = $request->get("blockedUsers4");
+            $bu[4] = $request->get("blockedUsers5");
+            
+            foreach($bu as $blockedUser) {
+                if($blockedUser != "") {
+                    $filter = new Filter();
+                    $filter->setType("BU");
+                    $filter->setFilter($blockedUser);
+                    $em->persist($filter);
+                    $em->flush();
 
-            return $this->redirect($this->generateUrl('stuart_hashtag_admin_site', array(
-                'name'  => $site->getSubdomain()
+                    $siteFilter = new SiteFilter();
+                    $siteFilter->setSiteId($site->getId());
+                    $siteFilter->setFilterId($filter->getId());
+                    $em->persist($siteFilter);
+                    $em->flush();
+                }
+            }
+            return $this->redirect($this->generateUrl('stuart_hashtag_view_sub', array(
+               'name'  => $site->getSubdomain()
             ), true));
         }
-        return $this->render('StuartHashtagBundle:Default:plus.html.twig', array('messages' => $messages, 'page' => $page, 'themes' => $this->getThemes(), 'form' => $form->createView()));
+        
+        return $this->render('StuartHashtagBundle:Default:plus.html.twig', array('request' => $params, 'form' => $form->createView(),'messages' => $messages, 'page' => $page, 'themes' => $this->getThemes()));
     }
     
     public function professionalAction(Request $request)
@@ -180,6 +162,10 @@ class CreateController extends Controller {
             );
         
         return $this->render('StuartHashtagBundle:Default:professional.html.twig', array('page' => $page, 'themes' => $this->getThemes()));
+    }
+    
+    public function checkSubAction($sub) {
+        return $this->verifySubdomain($sub) ? new JsonResponse(array("exists" => true)) : new JsonResponse(array("exists" => false));
     }
     
     public function adminSiteAction($name, Request $request) {
@@ -241,6 +227,16 @@ class CreateController extends Controller {
         ));
     }
     
+    public function createThemeAction() {
+        $this->page["heading"] = "Create a Theme";
+        $this->page["title"] = "Create a Theme";
+        $this->page["description"] = "";
+        
+        return $this->render('StuartHashtagBundle:Default:createTheme.html.twig', array(
+            'page' => $this->page
+        ));
+    }
+    
     public function adminHomeAction(Request $request) {
         
         $this->page["heading"] = "Admin Panel";
@@ -287,21 +283,18 @@ class CreateController extends Controller {
         return $this->render('StuartHashtagBundle:Default:adminHome.html.twig', array('page' => $this->page, 'messages' => 0));
     }
     
-    public function checkSubAction($sub) {
-        return $this->verifySubdomain($sub) ? new JsonResponse(array("exists" => true)) : new JsonResponse(array("exists" => false));
-    }
-            
-    
     function getThemes() {
         $themes = $this->getDoctrine()->getRepository('StuartHashtagBundle:Theme')->findAll();
         
         $themeResults = array();
         foreach($themes as $theme) {
-            array_push($themeResults, array(
-                'themeName' => $theme->getThemeName(),
-                'themeClass' => $theme->getClass(),
-                'id' => $theme->getId()
-            ));
+            if(!$theme->getPrivate()){
+                array_push($themeResults, array(
+                    'themeName' => $theme->getThemeName(),
+                    'themeClass' => $theme->getClass(),
+                    'id' => $theme->getId()
+                ));
+            }
         }
         
         return $themeResults;
@@ -311,6 +304,30 @@ class CreateController extends Controller {
         return $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->findOneBySubdomain($subdomain);    
     }
     
+    function generateForm() {
+        //Gen theme choices
+        $themes = $this->getThemes();
+        $themeList = array();
+        foreach($themes as $theme) {
+            $themeList[$theme["id"]] = $theme["themeName"];
+        }
+        $themeChoices = array('choices' => $themeList);
+        
+        $site = new Site();
+        $site->setStartDate(new \DateTime());
+        $form = $this->createFormBuilder($site)
+                ->add('name')
+                ->add('subdomain')
+                ->add('hashtag')
+                ->add('startDate', 'date')
+                ->add('themeId', 'choice', $themeChoices)
+                ->add('file')
+                ->add('password', 'password')
+                ->add('create', 'submit')
+                ->getForm();
+        
+        return $form;
+    }
     
     
 }

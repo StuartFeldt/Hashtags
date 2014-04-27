@@ -145,3 +145,14 @@ h6, .h6 {
 #sub-fg .fg-icon {
     right:165px;
 }
+
+#bu-fg input {
+    margin-bottom:5px;
+}
+
+.form-divider {
+    font-size:24px;
+    color:#559;
+    border-bottom:1px solid #aaa;
+    margin-top:40px;
+}
