@@ -16,7 +16,7 @@ namespace Stuart\HashtagBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Stuart\HashtagBundle\Entity\Site;
-
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CreateController extends Controller {
 
@@ -73,8 +73,8 @@ class CreateController extends Controller {
                 ->add('hashtag')
                 ->add('startDate', 'date')
                 ->add('themeId', 'choice', $themeChoices)
-                ->add('file')
-                ->add('password', 'password')
+                ->add('file', null, array("required" => false))
+                ->add('password', 'password', array("required" => false))
                 ->add('create', 'submit')
                 ->getForm();
         
@@ -101,7 +101,7 @@ class CreateController extends Controller {
             $em->persist($site);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('stuart_hashtag_admin_site', array(
+            return $this->redirect($this->generateUrl('stuart_hashtag_view', array(
                 'name'  => $site->getSubdomain()
             ), true));
         }
@@ -112,13 +112,62 @@ class CreateController extends Controller {
     public function plusAction(Request $request)
     {
         //set page vars
+        $messages = 0;
         $page = array(
             "title" => 'Create a hashtag', 
             "heading" => "Hashtag your event",
             "description" => 'Standard+'
             );
         
-        return $this->render('StuartHashtagBundle:Default:plus.html.twig', array('page' => $page, 'themes' => $this->getThemes()));
+        //Gen theme choices
+        $themes = $this->getThemes();
+        $themeList = array();
+        foreach($themes as $theme) {
+            $themeList[$theme["id"]] = $theme["themeName"];
+        }
+        $themeChoices = array('choices' => $themeList);
+        
+        $site = new Site();
+        $site->setStartDate(new \DateTime());
+        $form = $this->createFormBuilder($site)
+                ->add('name')
+                ->add('subdomain')
+                ->add('hashtag')
+                ->add('startDate', 'date')
+                ->add('themeId', 'choice', $themeChoices)
+                ->add('file')
+                ->add('password', 'password')
+                ->add('create', 'submit')
+                ->getForm();
+        
+        
+        $form->handleRequest($request);
+        
+         if ($form->isValid()) {
+            $site = $form->getData();
+            
+            if($this->verifySubdomain($site->getSubdomain())) {
+                $messages = array("error" => "Subdomain taken.  Please choose another.");
+                return $this->render('StuartHashtagBundle:Default:plus.html.twig', array('page' => $page, 'messages' => $messages, 'debug' => $this->debug, 'form' => $form->createView()));
+            }
+            
+            $endDate = new \DateTime($site->getStartDate()->format('Y-m-d H:i:s'));
+            $endDate->add(new \DateInterval("P14D"));        
+            $site->setEndDate($endDate);
+            
+            $em = $this->getDoctrine()->getManager();
+            
+            $site->sha1Pass();
+            $site->upload();
+
+            $em->persist($site);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('stuart_hashtag_admin_site', array(
+                'name'  => $site->getSubdomain()
+            ), true));
+        }
+        return $this->render('StuartHashtagBundle:Default:plus.html.twig', array('messages' => $messages, 'page' => $page, 'themes' => $this->getThemes(), 'form' => $form->createView()));
     }
     
     public function professionalAction(Request $request)
@@ -237,6 +286,11 @@ class CreateController extends Controller {
         
         return $this->render('StuartHashtagBundle:Default:adminHome.html.twig', array('page' => $this->page, 'messages' => 0));
     }
+    
+    public function checkSubAction($sub) {
+        return $this->verifySubdomain($sub) ? new JsonResponse(array("exists" => true)) : new JsonResponse(array("exists" => false));
+    }
+            
     
     function getThemes() {
         $themes = $this->getDoctrine()->getRepository('StuartHashtagBundle:Theme')->findAll();

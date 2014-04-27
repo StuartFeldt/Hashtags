@@ -5,37 +5,67 @@
     <div class="alert alert-danger alert-dismissable">{{ messages.error }}</div>
   {% endif %}
 
-{{ form_start(form) }}
-  
-  <div class="form-group">
-    {{form_label(form.hashtag)}}
-    {{ form_widget(form.hashtag, {'attr': {'class': 'form-control', 'placeholder': 'Enter Hashtag'}}) }}
+{{ form_start(form, {'attr': {'role': 'form'}}) }}
+  <div class="form-group has-feedback" id="hash-fg">
+        {{form_label(form.hashtag)}}
+        {{ form_errors(form.hashtag) }}
+      <div class="input-group has-feedback">
+        <span class="input-group-addon">#</span>
+        {{ form_widget(form.hashtag, {'attr': {'class': 'form-control', 'placeholder': 'Enter Hashtag'}}) }}
+        <span class="glyphicon form-control-feedback fg-icon"></span>
+      </div>
   </div>
-  <div class="form-group">
+
+  <div class="form-group has-feedback" id="name-fg">
     {{form_label(form.name)}}
+    {{ form_errors(form.name) }}
     {{ form_widget(form.name, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Name'}}) }}
+    <span class="glyphicon form-control-feedback"></span>
   </div>
-  <div class="form-group">
+
+  <div class="form-group has-feedback" id="sub-fg">
     {{form_label(form.subdomain)}}
-    {{ form_widget(form.subdomain, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Subdomain'}}) }}
+    {{ form_errors(form.subdomain) }}
+    <div class="input-group">
+        {{ form_widget(form.subdomain, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Subdomain'}}) }}
+        <span class="glyphicon form-control-feedback fg-icon"></span>
+        <span class="input-group-addon">.hashtagmyevent.com</span>
+        
+    </div>
   </div>
-  <div class="form-group">
+
+  <div class="form-group has-feedback">
     {{form_label(form.startDate)}}
+    {{ form_errors(form.startDate) }}
     {{ form_widget(form.startDate, {'attr': {'class': 'form-control not-hashtag'}}) }}
   </div>
+
   <div class="form-group">
     {{form_label(form.file)}}
+    {{ form_errors(form.file) }}
     {{ form_widget(form.file, {'attr': {'class': 'form-control not-hashtag'}}) }}
   </div>
-   <div class="form-group">
-    {{form_label(form.themeId)}}
-    {{ form_widget(form.themeId, {'attr': {'class': 'form-control not-hashtag'}}) }}
-       <p class="small"><a id="prev-link" target="_new" href="/preview/1">Preview Themes</a></p>
-   </div>
+
     <div class="form-group">
-    {{form_label(form.password)}}
-    {{ form_widget(form.password, {'attr': {'class': 'form-control not-hashtag'}}) }}
+      {{form_label(form.themeId)}}
+      {{ form_errors(form.themeId) }}
+      {{ form_widget(form.themeId, {'attr': {'class': 'form-control not-hashtag'}}) }}
+    </div>
+
+   <div class="form-group has-feedback pass-fg">
+      {{form_label(form.password)}}
+      {{ form_errors(form.password) }}
+      {{ form_widget(form.password, {'attr': {'class': 'form-control not-hashtag'}}) }}
+      <span class="glyphicon form-control-feedback"></span>
    </div>
+
+    <div class="form-group has-feedback pass-fg">
+      <label for="confirmPass">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPass">
+      <span class="glyphicon form-control-feedback"></span>
+    </div>
+
+    {% block formextend %}{% endblock %}
   {{ form_widget(form.create, {'attr': {'class': 'btn btn-default'}}) }}
 {{ form_end(form) }}
 {% endblock %}
@@ -48,6 +78,59 @@
 {% block extrascript %}
 <script>
 $(document).ready(function(){
+    
+$('#form_subdomain').keyup(function(e){
+    var sub = $('#form_subdomain').val();
+    if(sub.length > 3) {
+        $.post("/checksub/"+sub, function(response){
+            if(response.exists == false) {
+                $('#sub-fg .fg-icon').removeClass("glyphicon-remove");
+                $('#sub-fg .fg-icon').addClass("glyphicon-ok");
+                $('#sub-fg').removeClass("has-error");
+                $('#sub-fg').addClass("has-success");
+                $('#sub-fg').addClass("has-feedback");
+            } else {
+                $('#sub-fg .fg-icon').removeClass("glyphicon-ok");
+                $('#sub-fg .fg-icon').addClass("glyphicon-remove");
+                $('#sub-fg').removeClass("has-success");
+                $('#sub-fg').addClass("has-error");
+                $('#sub-fg').addClass("has-feedback");
+            }
+        });
+    }
+});
+
+$('#form_hashtag').change(function(){
+    if($('#form_hashtag').val().indexOf(" ") >= 0) {
+        $('#hash-fg .fg-icon').addClass("glyphicon-remove");
+        $('#hash-fg').addClass("has-error");
+    } else {
+        $('#hash-fg .fg-icon').addClass("glyphicon-ok");
+        $('#hash-fg .fg-icon').removeClass("glyphicon-remove");
+        $('#hash-fg').removeClass("has-error");
+        $('#hash-fg').addClass("has-success");
+    }
+});
+
+$('#form_name').change(function(){
+    $('#name-fg span').addClass("glyphicon-ok");
+    $('#name-fg').addClass("has-success");
+});
+    
+$('#confirmPass').change(function(){
+    if($('#confirmPass').val() == $('#form_password').val()) {
+        $('.pass-fg').removeClass('has-error');
+        $('.pass-fg').addClass('has-success');
+        $('.pass-fg span').removeClass('glyphicon-remove');
+        $('.pass-fg span').addClass('glyphicon-ok');
+    } else {
+        $('.pass-fg').removeClass('has-success');
+        $('.pass-fg').addClass('has-error');
+        $('.pass-fg span').removeClass('glyphicon-ok');
+        $('.pass-fg span').addClass('glyphicon-remove');
+    }
+});    
+    
 var hashtagOpts = {
     title: "Hashtag",
     html: true,

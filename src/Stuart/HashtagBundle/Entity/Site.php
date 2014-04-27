@@ -35,6 +35,12 @@ class Site implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="subdomain", type="string", length=45)
+     * @Assert\Length(
+     *      min = "4",
+     *      max = "45",
+     *      minMessage = "Subdomain be at least {{ limit }} characters length",
+     *      maxMessage = "Subdomain cannot be longer than {{ limit }} characters length"
+     * )
      */
     private $subdomain;
 
@@ -56,6 +62,7 @@ class Site implements UserInterface, \Serializable
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=160)
+     * 
      */
     private $password;
 
@@ -78,11 +85,13 @@ class Site implements UserInterface, \Serializable
      * @var integer
      *
      * @ORM\Column(name="themeId", type="integer")
+     * 
      */
     private $themeId;
     
     /**
-     * @Assert\File(maxSize="6000000")
+     * @Assert\File(maxSize="2097152")
+     * @Assert\Image()
      */
     private $file;
 
