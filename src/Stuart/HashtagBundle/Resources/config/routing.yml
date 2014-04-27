@@ -112,3 +112,7 @@ stuart_hashtag_admin_modify_tweet:
     pattern: /admin/tweet/modify/{tweet}
     defaults: { _controller: StuartHashtagBundle:Admin:modifyTweet}
     
+stuart_hashtag_check_subdomain:
+    pattern: /checksub/{sub}
+    defaults: { _controller: StuartHashtagBundle:Create:checkSub}
+    

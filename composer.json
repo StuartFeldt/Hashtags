@@ -20,7 +20,8 @@
         "sensio/generator-bundle": "~2.3",
         "incenteev/composer-parameter-handler": "~2.0",
         "jublonet/codebird-php": "2.4.0",
-        "php-instagram-api/php-instagram-api": "dev-master"
+        "php-instagram-api/php-instagram-api": "dev-master",
+        "opennotion/profanity-filter": "dev-master"
     },
     "scripts": {
         "post-install-cmd": [

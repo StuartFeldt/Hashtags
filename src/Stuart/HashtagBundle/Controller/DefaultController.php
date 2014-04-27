@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Stuart\HashtagBundle\Entity\Tweet;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Codebird\Codebird;
+use OpenNotion\ProfanityFilter\Filter;
 
 class DefaultController extends Controller
 {
@@ -87,7 +88,8 @@ class DefaultController extends Controller
         $bearer_token = $reply->access_token;
 
         $reply = $cb->search_tweets('q='.$site->getHashtag().'&include_en&rpp=20&show_user=true&include_entities=true&with_twitter_user_id=true&result_type=recent', true);
-
+        
+        
         $response = array(
             'name' => $site->getName(),
             'hashtag' => $site->getHashtag(),
@@ -143,6 +145,7 @@ class DefaultController extends Controller
     public function getTweetsAction($id) {
         $tweets = $this->getDoctrine()->getRepository('StuartHashtagBundle:Tweet')->findBySiteId($id);
         $tweet_res = array();
+
         foreach($tweets as $tweet) {
             array_push($tweet_res, array(
                 'tweetBody' => $tweet->getTweetBody(),
