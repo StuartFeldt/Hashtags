@@ -4,7 +4,10 @@
   {% if messages != 0 %}
     <div class="alert alert-danger alert-dismissable">{{ messages.error }}</div>
   {% endif %}
+    
+{% block themecreate %}{% endblock %}
 
+<div id="general">
 {{ form_start(form, {'attr': {'role': 'form'}}) }}
   <div class="form-group has-feedback" id="hash-fg">
         {{form_label(form.hashtag)}}
@@ -39,7 +42,9 @@
     {{ form_errors(form.startDate) }}
     {{ form_widget(form.startDate, {'attr': {'class': 'form-control not-hashtag'}}) }}
   </div>
+</div>
 
+<p class="form-divider">Appearance</p>
   <div class="form-group">
     {{form_label(form.file)}}
     {{ form_errors(form.file) }}
@@ -50,8 +55,11 @@
       {{form_label(form.themeId)}}
       {{ form_errors(form.themeId) }}
       {{ form_widget(form.themeId, {'attr': {'class': 'form-control not-hashtag'}}) }}
+    {% block themeextend %}{% endblock %}
     </div>
 
+
+<p class="form-divider">Admin Password</p>
    <div class="form-group has-feedback pass-fg">
       {{form_label(form.password)}}
       {{ form_errors(form.password) }}
@@ -65,7 +73,13 @@
       <span class="glyphicon form-control-feedback"></span>
     </div>
 
+<p class="form-divider">Filters</p>
+    <div class="form-group has-feedback pass-fg">
+      <label for="profanity">Profanity Filter</label>
+      <input type="checkbox" id="profanity">
+    </div>
     {% block formextend %}{% endblock %}
+
   {{ form_widget(form.create, {'attr': {'class': 'btn btn-default'}}) }}
 {{ form_end(form) }}
 {% endblock %}
@@ -73,8 +87,8 @@
 {% block options %}
     <h4>Want More Options?</h4>
     <p>Try the <a href="/create/plus">Standard+</a> or <a href="/create/premium">Premium</a> options for blocking usernames, blocking profanity, and additional hashtag </p>
-{% endblock %}
-  
+{% endblock %}  
+    
 {% block extrascript %}
 <script>
 $(document).ready(function(){

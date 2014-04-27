@@ -116,3 +116,6 @@ stuart_hashtag_check_subdomain:
     pattern: /checksub/{sub}
     defaults: { _controller: StuartHashtagBundle:Create:checkSub}
     
+stuart_hashtag_create_theme:
+    pattern: /create/theme
+    defaults: { _controller: StuartHashtagBundle:Create:createTheme}    
