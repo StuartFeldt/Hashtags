@@ -19,15 +19,17 @@
             env: "/app_dev.php/",
             timeline: false,
             initiated: false,
-            playing: false
+            playing: false,
+            filterProfanity: 0
         },
         
         //init function
-        init: function(site, hashtag, pullInt, showInt) {
+        init: function(site, hashtag, pullInt, showInt, filterP) {
             ht.options.site = site;
             ht.options.hashtag = hashtag;
             ht.options.pullInt = pullInt;
             ht.options.showInt = showInt;
+            ht.options.filterProfanity = filterP;
             ht.options.ij = Instajam.init({
                 clientId: 'aea6ae8f16e741dbb264f86de4829688',
                 redirectUri: 'http://hashdev.stuartfeldt.com'
@@ -41,6 +43,7 @@
             $('#ht-control-play').addClass("active");
             $('#ht-control-pause').removeClass("active");
             ht.pullTweets();
+            ht.getTweets();
             pollInt = setInterval("ht.getTweets()", ht.options.pullInt);
             instaInt = setInterval("ht.getInsta()", 60000);
             showInt = setInterval("ht.showTweets()", ht.options.showInt);
@@ -184,8 +187,14 @@
                 }
                 ht.tweets.currentTweet++;
              }
-
-            $('#tweets').fadeIn(2000);
+             
+            if(ht.options.filterProfanity == 1) { 
+                $('#tweets').fadeIn(2000).profanityFilter({
+                    externalSwears: '/assets/swearWords.json'
+                });
+            } else {
+                $('#tweets').fadeIn(2000);
+            }
             $('#tweets .tweet:nth-child(4)').fadeOut();
             $('#tweets .tweet:nth-child(5)').fadeOut();
             $('#tweets .tweet:nth-child(6)').fadeOut();
