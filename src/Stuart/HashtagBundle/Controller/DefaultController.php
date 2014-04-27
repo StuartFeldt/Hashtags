@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Stuart\HashtagBundle\Entity\Tweet;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Codebird\Codebird;
-use OpenNotion\ProfanityFilter\Filter;
+use Stuart\HashtagBundle\BadWordsFilter;
 
 class DefaultController extends Controller
 {
@@ -47,7 +47,8 @@ class DefaultController extends Controller
                 "theme" => $theme != "" ? $theme->getClass() : "empty",
                 "css" => $theme != "" ? $theme->getCss() : "",
                 "description" => "create",
-                "heading" => "Create a hashtag"
+                "heading" => "Create a hashtag",
+                "filterP" => 1
             );
         
         //Check if site is within valid dates
@@ -79,7 +80,8 @@ class DefaultController extends Controller
     public function pollAction($id)
     {
         $site = $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->find($id);
-
+        $filter = new BadWordsFilter();
+        
         Codebird::setConsumerKey('WQOK7uxRI60gsCTsHnAMw', 'wPlLms2qIeqUBCcdFo2vAOWCcPMUm3hzmgI43EzMs'); // static, see 'Using multiple Codebird instances'
 
         $cb = Codebird::getInstance();
@@ -89,11 +91,14 @@ class DefaultController extends Controller
 
         $reply = $cb->search_tweets('q='.$site->getHashtag().'&include_en&rpp=20&show_user=true&include_entities=true&with_twitter_user_id=true&result_type=recent', true);
         
+        foreach($reply as $status){
+            //censor
+        }
         
         $response = array(
             'name' => $site->getName(),
             'hashtag' => $site->getHashtag(),
-            'reply' => $reply,
+            'reply' => $reply
         );
         return new JsonResponse($response);
     }    
