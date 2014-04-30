@@ -1,0 +1,9 @@
+{
+  "project.name" : "phabricator",
+  "phabricator.uri" : "http://phabricator.stuartfeldt.com/",
+  "lint.engine" : "PhabricatorLintEngine",
+  "unit.engine" : "PhutilUnitTestEngine",
+  "load" : ["./"],
+  "lint.xhpast.naminghook" : "PhabricatorSymbolNameLinter",
+  "lint.jshint.config" : "support/jshint/jshintconfig"
+}
