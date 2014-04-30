@@ -2,6 +2,8 @@
 
 App for pulling instagram and twitter posts by hashtag.
 
+##Any feature suggestions or functionality ideas, please submit them as issues!!!!!!!!!!!##
+
 v0.0.8
 
 ###RoadMap###
