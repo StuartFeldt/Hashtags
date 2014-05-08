@@ -48,6 +48,10 @@ stuart_hashtag_saveTweet:
     pattern:  /save
     defaults: { _controller: StuartHashtagBundle:Default:saveTweet }
     
+stuart_hashtag_getActiveSites:
+    pattern:  /getActive
+    defaults: { _controller: StuartHashtagBundle:Default:getActive }
+    
 stuart_hashtag_getTweets:
     pattern:  /getTweets/{id}
     defaults: { _controller: StuartHashtagBundle:Default:getTweets }
