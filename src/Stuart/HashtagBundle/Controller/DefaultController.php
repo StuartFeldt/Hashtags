@@ -108,7 +108,7 @@ class DefaultController extends Controller
         $tweet = $this->getDoctrine()->getRepository('StuartHashtagBundle:Tweet')->findByTweetId($request->get('tweet_id'));
         if($tweet) {
             $response = array(
-                'exists' => 1
+                'exists' => 1, 'tweet_id' => $request->get('tweet_id')
             );
         
             return new JsonResponse($response);
@@ -145,6 +145,29 @@ class DefaultController extends Controller
         );
         
         return new JsonResponse($response);
+    }
+    
+    public function getActiveAction() {
+        $now = new \DateTime();
+        $qb = $this->getDoctrine()->getManager()->createQueryBuilder();
+        
+        $qb->select('e')
+            ->from('StuartHashtagBundle:Site','e')
+            ->add('where', $qb->expr()->between(
+                     ':now',
+                     'e.startDate',
+                     'e.endDate'
+                 )
+             )
+            ->setParameters(array('now' => $now));
+
+        $q = $qb->getQuery();
+        $results = $q->execute();
+        $res = "";
+        foreach($results as $site) {
+            $res .= $site->getHashtag().",";
+        }
+        return new JsonResponse($res);
     }
     
     public function getTweetsAction($id) {
