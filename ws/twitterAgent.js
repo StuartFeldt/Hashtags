@@ -21,14 +21,21 @@ function parseTwitterDate($stamp)
 }
 
 var tracks = "";
+var tpsCalcTime = 10000;
+var tweetCounter = 0;
+
+var int = setInterval(function(){
+    console.log(tweetCounter / 60 + " TPS");
+    tweetCounter = 0;
+}, 60000);
+
 
 request.post(
-'http://dev.hashtagmyevent.com/getActive',
+'http://hashtagmyevent.com/getActive',
 {  },
 function (error, response, body) {
     if (!error && response.statusCode == 200) {
         tracks = body;
-        console.log(tracks);
     }         
 
 twit.stream('filter', {track:tracks}, function(stream) {
@@ -56,7 +63,8 @@ twit.stream('filter', {track:tracks}, function(stream) {
             { form: tweet },
             function (error, response, body) {
                 if (!error && response.statusCode == 200) {
-                    console.log(body)
+                    //console.log(body)
+                    tweetCounter++;
                 }
             }
         );
