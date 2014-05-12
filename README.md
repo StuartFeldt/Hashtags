@@ -2,9 +2,8 @@
 
 App for pulling instagram and twitter posts by hashtag.
 
-##Any feature suggestions or functionality ideas, please submit them as issues!!!!!!!!!!!##
+##Any feature suggestions or functionality ideas, please submit them as issues [here](https://github.com/StuartFeldt/Hashtags/issues?direction=desc&sort=updated&state=open)##
 
-http://phabricator.stuartfeldt.com
 
 v0.0.8
 
