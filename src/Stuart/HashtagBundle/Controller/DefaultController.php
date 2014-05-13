@@ -80,7 +80,6 @@ class DefaultController extends Controller
     public function pollAction($id)
     {
         $site = $this->getDoctrine()->getRepository('StuartHashtagBundle:Site')->find($id);
-        $filter = new BadWordsFilter();
         
         Codebird::setConsumerKey('WQOK7uxRI60gsCTsHnAMw', 'wPlLms2qIeqUBCcdFo2vAOWCcPMUm3hzmgI43EzMs'); // static, see 'Using multiple Codebird instances'
 
@@ -90,10 +89,6 @@ class DefaultController extends Controller
         $bearer_token = $reply->access_token;
 
         $reply = $cb->search_tweets('q='.$site->getHashtag().'&include_en&rpp=20&show_user=true&include_entities=true&with_twitter_user_id=true&result_type=recent', true);
-        
-        foreach($reply as $status){
-            //censor
-        }
         
         $response = array(
             'name' => $site->getName(),
@@ -173,7 +168,9 @@ class DefaultController extends Controller
     public function getTweetsAction($id) {
         $tweets = $this->getDoctrine()->getRepository('StuartHashtagBundle:Tweet')->findBySiteId($id);
         $tweet_res = array();
-
+				$numTweets = 0;
+				$numInsta = 0;
+								
         foreach($tweets as $tweet) {
             array_push($tweet_res, array(
                 'tweetBody' => $tweet->getTweetBody(),
@@ -183,9 +180,15 @@ class DefaultController extends Controller
                 'tweetPic' => $tweet->getTweetPic() == "" || $tweet->getTweetPic() == "noshow" ? "0" : $tweet->getTweetPic(),
                 'tweetType' => $tweet->getTweetType()
             ));
+						if($tweet->getTweetType()=="twitter") {
+							$numTweets++;
+						} else {
+							$numInsta++;
+						}
         }
         shuffle($tweet_res);
-        return new JsonResponse($tweet_res);
+				$response = array('tweets' => $tweet_res, 'numInsta' => $numInsta, 'numTweets' => $numTweets);
+        return new JsonResponse($response);
     }
     
     public function getTweetsTimelineAction($id) {

@@ -9,6 +9,7 @@
         
         pollint:0,
         showInt:0,
+				
         
         //initial options
         options: {
@@ -39,7 +40,6 @@
         
         //start
         start: function() {
-            console.log("----Ht Starting----");
             $('#ht-control-play').addClass("active");
             $('#ht-control-pause').removeClass("active");
             ht.pullTweets();
@@ -89,12 +89,12 @@
         },
         
         getTweets: function() {
-            console.log("getting tweets from Twitter...");
             $.getJSON(ht.options.env + 'poll/' + ht.options.site, function(data){
-		numTweets = data.reply.statuses.length;
-		statuses = data.reply.statuses;
+								numTweets = data.reply.statuses.length;
+								statuses = data.reply.statuses;
                 
                 $.each(statuses, function(i,tweet){
+									
                     var tweet_body =  tweet.text;
                     var tweet_author = tweet.user.screen_name;
                     var tweet_author_pic = tweet.user.profile_image_url;
@@ -113,7 +113,6 @@
         
         getInsta: function() {
             $.getJSON("https://api.instagram.com/v1/tags/"+ht.options.hashtag+"/media/recent?client_id=bc7bb286c6834142af582ef9a6029279&callback=?", function(data){
-                console.log("Getting Instagram Posts...");
                 numTweets = data.data.length;
 		statuses = data.data;
                 
@@ -147,20 +146,34 @@
                         //console.log(" -- -- spliced in to stack at " + splice_spot); 
                         ht.tweets.splicedTweets++; 
                         ht.tweets.numTweets++; 
+												if(tweet_type == "twitter") {
+													ht.tweets.numTwitter++;
+													$('#num-tweets').text(ht.tweets.numTwitter);
+												} else {
+													ht.tweets.numInsta++;
+													$('#num-insta').text(ht.tweets.numInsta);
+												}
+												console.log(tweet_type);
+											$('#num-total').text(ht.tweets.numTweets);
                     }
                 });
         },
         
         pullTweets: function() {
-            console.log("getting tweets from HQ and resetting tweets...");
+             console.log("getting tweets from HQ and resetting tweets...");
             var url = ht.options.timeline ? 'getTweetsTimeline/' : 'getTweets/';
             $.getJSON(ht.options.env + url + ht.options.site, function(data){
-                ht.tweets.numTweets = data.length;
+                ht.tweets.numTweets = data.tweets.length;
                 ht.tweets.currentTweet = 0;
                 ht.tweets.splicedTweets = 0;
-                ht.tweets.tweets = data;
+                ht.tweets.tweets = data.tweets;
+								ht.tweets.numInsta = data.numInsta;
+								ht.tweets.numTwitter = data.numTweets;
                 ht.showTweets();
-                console.log(" - There are "+ht.tweets.numTweets+" tweets currently in hq");
+								
+								$('#num-tweets').text(ht.tweets.numTwitter);
+								$('#num-insta').text(ht.tweets.numInsta);
+								$('#num-total').text(ht.tweets.numTweets);
             });
         },
                 
@@ -206,6 +219,8 @@
         
         tweets: {
             numTweets: 0,
+					  numTwitter: 0,
+						numInsta: 0,
             currentTweet: 0,
             splicedTweets: 0,
             tweets: []

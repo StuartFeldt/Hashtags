@@ -8,8 +8,8 @@ window.Tweedia = Tweedia = {
         /* Search media entities */
         if(tweet.entities.media !== undefined && tweet.entities.media.length > 0) {
                 for(var m in tweet.entities.media) {
-        
                     /* Check for jpg, png, gif */
+										console.log(tweet.entities.media[m]);
                     if(tweet.entities.media[m].media_url.indexOf("jpg") !== -1 || tweet.entities.media[m].media_url.indexOf("png") !== -1 || tweet.entities.media[m].media_url.indexOf("gif") !== -1) {  
                             callback(tweet.entities.media[m].media_url);
                         }
@@ -17,7 +17,7 @@ window.Tweedia = Tweedia = {
 
             } else if(tweet.entities.urls !== undefined && tweet.entities.urls.length > 0) {
                 for(var u in tweet.entities.urls) {
-
+										console.log(tweet.entities.urls[u]);
                     /* Check for jpg, png, gif */
                     if(tweet.entities.urls[u].expanded_url.indexOf("jpg") !== -1 || tweet.entities.urls[u].expanded_url.indexOf("png") !== -1 || tweet.entities.urls[u].expanded_url.indexOf("gif") !== -1) {
                             callback(tweet.entities.urls[u].expanded_url);

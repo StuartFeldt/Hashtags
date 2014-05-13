@@ -8,7 +8,7 @@ body {
 body { box-shadow: inset 0 0 100px rgba(0,0,0,.5);}
 #brand{ font-size:35px;}
 .navbar-inner{text-shadow: 0 1px 3px rgba(0,0,0,.5);}
-#tweets{margin-top:65px;}
+#main-contain{margin-top:24px;}
 .tweet{background-color: rgba(255, 255, 255, 0.9) !important;  }
 #tweet_body, .tweet_body
 {
@@ -62,3 +62,7 @@ float:left;
 }
 
 
+.ht-remote {
+	width:100%;
+	margin-bottom:6px;
+}
