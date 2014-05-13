@@ -1,244 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="/favicon.ico">
+{% extends "StuartHashtagBundle::layout.html.twig" %}
 
-    <title>Hashtag your event</title>
-    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Quicksand|Fondamento' rel='stylesheet' type='text/css'>
-    <!-- Bootstrap core CSS -->
-    <link href="/assets/css/bootstrap.css" rel="stylesheet">
-    <link href="/assets/css/navigation.css" rel="stylesheet">
+{% block main %}
+<div class="slick">
+  <div class="slick-bash-slide">
+		<img  src="/assets/Social_Icons/twitter.png" alt="Generic placeholder image">
+    <h2>Twitter</h2>
+    <p>Pull tweets from Twitter based on #hashtag.  Images from yfrog, instagram, and twitpic will be displayed.</p>
+	</div>
+  <div class="slick-bash-slide">
+		<img src="/assets/Social_Icons/Instagram.png" alt="Generic placeholder image">
+		<h2>Instagram</h2>
+		<p>Pull images posed to Instagram tagged with #hashtag.  Also, displays any associated text and author.</p>
+	</div>
+  <div class="slick-bash-slide">
+		<p>Other fun facts.</p>
+		
+	</div>
+</div>
+<br>
+<div id="get-started">
+	<span> &bull; </span>
+	<a href="/create" type="button" class="btn btn-default btn-lg">Get Started</a>
+	<span> &bull; </span>
+	<a href="/view/test123" class="btn btn-default btn-lg">View Demo</a>
+	<span> &bull; </span>
+</div>
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+{% endblock %}
+{% block extrascript %}
+<script>
+$(document).ready(function(){
+	$('.slick').slick({
+		autoplay: true,
+		pauseOnHover: false
+	});
+});
+</script>
 
-    <!-- Custom styles for this template -->
-    <link href="/assets/css/carousel.css" rel="stylesheet">
-  </head>
-<!-- NAVBAR
-================================================== -->
-  <body>
-      
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-    <div>
-        <div id="front-page">
+{% endblock %}
 
-
-            <!-- Header-->
-            <header class="container pull-left">
-              <div class="row">
-                <div class="col-md-4">
-                  <!-- Logo-->
-                  <div class="logo">
-                    <div id="front-page-title">HASHTAGMYEVENT</div>
-                    <div id="front-page-text">Hashtag your event <span class="bullet">&#149;</span> <span class="gold">For free</span></div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-3">
-                        <a href="/create" type="button" id="get-started" class="btn btn-default btn-lg">Get Started</a>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                        <p><a id="int-scroll" href="javascript:void()">Supported Social Platforms</a></p>
-                        <p><a id="packages-scroll" href="javascript:void()">View Packages & Pricing</a></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-md-8" id="tweets">
-                    
-                </div>
-              </div>
-            </header>
-
-        </div>
-        <div id="supported-platforms"></div>
-    </div>
-    
-    <div id="platforms-container" class="container marketing">
-      <h1 class="center featurette-heading">Supported Platforms</h1>
-      <hr>
-      <!-- Three columns of text below the carousel -->
-      <div class="row">
-        <div class="col-lg-4">
-          <img  src="/assets/Social_Icons/twitter.png" alt="Generic placeholder image">
-          <h2>Twitter</h2>
-          <p>Pull tweets from Twitter based on #hashtag.  Images from yfrog, instagram, and twitpic will be displayed.</p>
-          <p><a class="btn btn-default" href="javascript:void()" role="button" data-toggle="modal" data-target="#twitterModal">View options &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->        
-        
-        <div class="col-lg-4">
-          <img src="/assets/Social_Icons/Instagram.png" alt="Generic placeholder image">
-          <h2>Instagram</h2>
-          <p>Pull images posed to Instagram tagged with #hashtag.  Also, displays any associated text and author.</p>
-          <p><a class="btn btn-default" href="javascript:void()" role="button" data-toggle="modal" data-target="#instagramModal">View options &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-        <div class="col-lg-4">
-          <img src="/assets/Social_Icons/pinterest.png" alt="Generic placeholder image">
-          <h2>Pinterest</h2>
-          <p>I don't really know exactly what pinterest does, but we will pull it.</p>
-          <p><a class="btn btn-default" href="javascript:void()" role="button" data-toggle="modal" data-target="#pinterestModal">View options &raquo;</a></p>
-        </div><!-- /.col-lg-4 -->
-      </div><!-- /.row -->
-    </div>
-
-    <!-- Twitter Modal -->
-    <div class="modal fade" id="twitterModal" tabindex="-1" role="dialog" aria-labelledby="tModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="tModalLabel">Twitter Options & Upgrades</h4>
-          </div>
-          <div class="modal-body">
-              <p>Describe how we interact with Twitter</p>
-              <p>A la carte upgrades, filters, and options.  Prices.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">ok</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Instagram Modal -->
-    <div class="modal fade" id="instagramModal" tabindex="-1" role="dialog" aria-labelledby="iModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="iModalLabel">Instagram Options & Upgrades</h4>
-          </div>
-          <div class="modal-body">
-              <p>Describe how we interact with Instagram</p>
-              <p>A la carte upgrades, filters, and options.  Prices.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">ok</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Pinterest Modal -->
-    <div class="modal fade" id="pinterestModal" tabindex="-1" role="dialog" aria-labelledby="pModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            <h4 class="modal-title" id="pModalLabel">Pinterest Options & Upgrades</h4>
-          </div>
-          <div class="modal-body">
-              <p>Describe how we interact with Pinterest</p>
-              <p>A la carte upgrades, filters, and options.  Prices.</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-success" data-dismiss="modal">ok</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="packages" class="container marketing">
-    
-      <!-- START THE FEATURETTES -->
-      <h1 class="center featurette-heading">Packages & Pricing</h1> 
-      <hr>
-      
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Standard <span class="text-muted">fo' free</span></h2>
-          <p class="lead">Standard options will include picking a subdomain & hashtag, standard profanity filter, 2 weeks of live time, 
-          choice of pre-made themes, choice of a background image or color, Twitter support only.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive img-circle" data-src="holder.js/400x400/Price/text:$0" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive img-circle" data-src="holder.js/400x400/Price/text:$200" alt="Generic placeholder image">
-        </div>
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Standard+ <span class="text-muted">well, it's a little bit...more</span></h2>
-          <p class="lead">In addition to the Standard pack, you also get a bit more time to view and collect hashtags.  
-              Maybe you can export to pdf or a video?  Custom themes?? Possibly.  Extra profanity blocks, User blocks?  Multi-Hashtag support. 
-              You got it.  Increased hashtag/minute collection. Instagram & Pinterest support.</p>
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">Professional.  <span class="text-muted">This one is for real.</span></h2>
-          <p class="lead">In addition to everything in Standard and Standard+, we can have you log in with facebook, and limit viewing only to friends.
-              One full year of viewing, complete support with whatever updgrades you want.  Unlimited hashtag/minute collection.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive img-circle" data-src="holder.js/400x400/Price/text:$500" alt="Generic placeholder image">
-        </div>
-      </div>
-
-      <hr class="featurette-divider">
-
-      <!-- /END THE FEATURETTES -->
-
-
-      <!-- FOOTER -->
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2014 RSOS &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
-
-    </div><!-- /.container -->
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="/assets/js/functions.js"></script>
-    <script type="text/javascript" src="/assets/js/moment.js"></script>
-    <script type="text/javascript" src="/assets/js/instajam.js"></script>
-    <script type="text/javascript" src="/assets/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/assets/js/docs.min.js"></script>
-    <script type="text/javascript" src="/assets/js/Tweedia.js"></script>
-    <script type="text/javascript" src="/assets/js/hashtags.js"></script>
-    <script>
-    Holder.add_theme("Price", {background:"#5bc0de", foreground:"#eee", size:100, font: "Monaco", fontweight:"normal"});
-    $(document).ready(function(){
-        ht.init(33, "", 30000, 6000);
-        setTimeout("ht.showTweets()", 500);
-        setInterval("ht.showTweets()", 6000);
-        
-    });
-    
-    $('#packages-scroll').click(function(){
-       $('html,body').animate({
-        scrollTop: $("#packages").offset().top},
-        'slow'); 
-    });
-    
-    $('#int-scroll').click(function(){
-       $('html,body').animate({
-        scrollTop: $("#supported-platforms").offset().top},
-        'slow'); 
-    });
-    
-    </script>
-  </body>
-</html>
+{% block footer %}{% endblock %}

@@ -22,7 +22,7 @@ stuart_hashtag_homepage:
 
 stuart_hashtag_create:
     pattern:  /create
-    defaults: { _controller: StuartHashtagBundle:Create:create }
+    defaults: { _controller: StuartHashtagBundle:Create:standard }
     
 stuart_hashtag_standard:
     pattern:  /create/standard

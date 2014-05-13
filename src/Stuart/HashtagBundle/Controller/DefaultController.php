@@ -7,18 +7,17 @@ use Symfony\Component\HttpFoundation\Request;
 use Stuart\HashtagBundle\Entity\Tweet;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Codebird\Codebird;
-use Stuart\HashtagBundle\BadWordsFilter;
 
 class DefaultController extends Controller
 {
     
     public $page = array(
-        "title" => 'title',
-        "hashtag" => 'hashtag',
+        "title" => 'Bashtag',
+        "hashtag" => 'Hashtag',
         "background" => 'background',
         "site" => 'site',
         "theme" => 'theme',
-        "description" => 'description',
+        "description" => 'Hashtag your event for free',
         "heading" => 'heading'
     );
     
