@@ -12,6 +12,7 @@
 	<![endif]-->
 	<link rel="shortcut icon" href="/favicon.ico">
 	<link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
 </head>
 <body>
 <div class="container">
@@ -19,6 +20,7 @@
         <div class="row">
             <div class="col-md-3">
 							<div class="row">
+								{% include "StuartHashtagBundle:modules:bashtag.html.twig" %}
 								<div class="btn-group ht-remote">
 									<button type="button" disabled="disabled" class="btn btn-default col-md-4">#{{ page.hashtag }}</button>
 									<button id="ht-control-play" onclick="ht.start()" title="Play" type="button" class="btn btn-default col-md-2"><span class="glyphicon glyphicon-play"></span></button>
@@ -30,7 +32,6 @@
 										<a href="#" class="list-group-item">Twitter<span id="num-tweets" class="badge">...</span></a>
 										<a href="#" class="list-group-item">Instagram<span id="num-insta" class="badge">...</span></a>
 										<a href="#" class="list-group-item" disabled="disabled">Total<span id="num-total" class="badge">...</span></span></a>
-										<a href="#" class="list-group-item">Updated: </a>
 									 </div>
 									</div>
             </div>
