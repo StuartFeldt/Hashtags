@@ -7,8 +7,8 @@ App for pulling instagram and twitter posts by hashtag.
 
 v0.1.0
 
-Main Branch:  http://hashtagmyevent.com
-Development:  http://dev.hashtagmyevent.com
+####Main Branch:  http://hashtagmyevent.com####
+####Development:  http://dev.hashtagmyevent.com####
 
 ###RoadMap###
 
