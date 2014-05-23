@@ -1,0 +1,30 @@
+.bashtag-logo {
+	font-family: 'Bangers', cursive;
+	color: #444;
+}
+
+.bash-tag-line {
+	line-height:12px;
+	font-size: 12px;
+	font-family: 'tahoma', sans-serif;
+	color:#333;
+	margin-top:0;
+}
+.groovin {
+	font-size:36px;
+	text-align:center;
+	padding:10px 0 0 0;
+	border:3px solid #555;
+	line-height:26px;
+	margin-bottom:6px;
+}
+
+.groovin:hover {
+	border:3px solid #444;
+	box-shadow: 0 0 4px #333;
+	cursor: pointer;
+}
+
+.bashtag a {
+	color: inherit;
+}

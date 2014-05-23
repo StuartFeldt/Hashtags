@@ -1,5 +1,7 @@
 {% extends "StuartHashtagBundle:Default:create.html.twig" %}
-
+{% block extracss %} 
+	<link href='/assets/css/create.css' rel='stylesheet' type='text/css'>
+{% endblock %}
 {% block main %}
   {% if messages != 0 %}
     <div class="alert alert-danger alert-dismissable">{{ messages.error }}</div>
@@ -32,7 +34,7 @@
     <div class="input-group">
         {{ form_widget(form.subdomain, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Subdomain'}}) }}
         <span class="glyphicon form-control-feedback fg-icon"></span>
-        <span class="input-group-addon">.hashtagmyevent.com</span>
+        <span class="input-group-addon">.bashtag.me</span>
         
     </div>
   </div>
@@ -208,7 +210,7 @@ var passOpts = {
     $('#form_file').popover(fileOpts);
     $('#form_themeId').popover(themeOpts);
     $('#form_password').popover(passOpts);
-    $('#form_hashtag').popover('show');
+   // $('#form_hashtag').popover('show');
     $('.not-hashtag').hover( function(){
         $('#form_hashtag').popover('hide');
     });
