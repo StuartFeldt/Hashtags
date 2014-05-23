@@ -38,7 +38,7 @@ function (error, response, body) {
         tracks = body;
     }         
 
-twit.stream('filter', {track:tracks}, function(stream) {
+twit.stream('filter', {track:'ozarks'}, function(stream) {
     console.log(tracks);
     stream.on('data', function(data) {
         var tweet_body =  data.text;
@@ -48,7 +48,7 @@ twit.stream('filter', {track:tracks}, function(stream) {
         var tweet_pic = "";
         var tweet_time = parseTwitterDate(data.created_at);
         var tweet = {
-            siteId: '2',
+            siteId: '88',
             body: tweet_body,
             screen_name: tweet_author,
             profile_image: tweet_author_pic,
@@ -57,17 +57,60 @@ twit.stream('filter', {track:tracks}, function(stream) {
             tweet_time: tweet_time,
             tweet_type: 'twitter'
           };
-
-        request.post(
-            'http://dev.hashtagmyevent.com/save',
-            { form: tweet },
-            function (error, response, body) {
-                if (!error && response.statusCode == 200) {
-                    //console.log(body)
-                    tweetCounter++;
-                }
-            }
-        );
+					
+					extractImg(tweet, function(url){
+                        if(url != -1) {
+                            tweet_pic = url;
+                        }
+                        request.post(
+													'http://hashtagmyevent.com/save',
+													{ form: tweet },
+													function (error, response, body) {
+															if (!error && response.statusCode == 200) {
+																	//console.log(body)
+																	tweetCounter++;
+															}
+													}
+											);
+                    });
+					
+        
     });
 });
 });
+
+
+function extractImg(tweet, callback) {
+        
+        /* Search media entities */
+        if(tweet.entities.media !== undefined && tweet.entities.media.length > 0) {
+                for(var m in tweet.entities.media) {
+									if(tweet.entities.media[m].media_url) {
+                    /* Check for jpg, png, gif */
+										ht.m = tweet.entities.media[m];
+                    if(tweet.entities.media[m].media_url.indexOf("jpg") !== -1 || tweet.entities.media[m].media_url.indexOf("png") !== -1 || tweet.entities.media[m].media_url.indexOf("gif") !== -1) {  
+                            callback(tweet.entities.media[m].media_url);
+                        }
+                    }
+								}
+
+            } else if(tweet.entities.urls !== undefined && tweet.entities.urls.length > 0) {
+
+                for(var u in tweet.entities.urls) {
+										if(tweet.entities.urls[u].expanded_url !== undefined) {
+                    /* Check for jpg, png, gif */
+                    if(tweet.entities.urls[u].expanded_url.indexOf("jpg") !== -1 || tweet.entities.urls[u].expanded_url.indexOf("png") !== -1 || tweet.entities.urls[u].expanded_url.indexOf("gif") !== -1) {
+                            callback(tweet.entities.urls[u].expanded_url);
+                        }
+                    /* Check if instagram */
+                    if(tweet.entities.urls[u].expanded_url.indexOf("instagram") !== -1) {
+                            this.getInstagram(tweet.entities.urls[u].expanded_url, function(ourl){
+                                callback(ourl);
+                            });
+                        }	
+										}
+                    }
+             } else {
+                 callback(-1);
+             }
+    }
