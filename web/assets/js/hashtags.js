@@ -9,7 +9,6 @@
         
         pollint:0,
         showInt:0,
-				
         
         //initial options
         options: {
@@ -52,7 +51,6 @@
         
         //pause
         pause: function() {
-            console.log("----HT Paused----");
             $('#ht-control-pause').addClass("active");
             $('#ht-control-play').removeClass("active");
             clearInterval(pollInt);
@@ -114,7 +112,7 @@
         getInsta: function() {
             $.getJSON("https://api.instagram.com/v1/tags/"+ht.options.hashtag+"/media/recent?client_id=bc7bb286c6834142af582ef9a6029279&callback=?", function(data){
                 numTweets = data.data.length;
-		statuses = data.data;
+								statuses = data.data;
                 
                 $.each(statuses, function(i,tweet){
                     var tweet_body =  tweet.caption.text;
@@ -153,14 +151,12 @@
 													ht.tweets.numInsta++;
 													$('#num-insta').text(ht.tweets.numInsta);
 												}
-												console.log(tweet_type);
 											$('#num-total').text(ht.tweets.numTweets);
                     }
                 });
         },
         
         pullTweets: function() {
-             console.log("getting tweets from HQ and resetting tweets...");
             var url = ht.options.timeline ? 'getTweetsTimeline/' : 'getTweets/';
             $.getJSON(ht.options.env + url + ht.options.site, function(data){
                 ht.tweets.numTweets = data.tweets.length;

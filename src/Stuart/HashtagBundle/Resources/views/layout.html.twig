@@ -12,11 +12,11 @@
     <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
-		<link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Bangers|Puritan' rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
-		<link href='/assets/css/create.css' rel='stylesheet' type='text/css'>
+		<link href='/assets/css/home.css' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/assets/slick/slick.css"/>
-    
+    <link rel="stylesheet" type="text/css" href="/assets/css/bashtag.css"/>
     {% block extracss %} {% endblock %}
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -32,7 +32,7 @@
 				<div class='col-md-6 col-md-offset-3'>
 					{% include 'StuartHashtagBundle:modules:bashtag.html.twig' %}
 				</div>
-					<div class="col-md-6 col-md-offset-3" id="create-heading"><h4><small>{{ page.description }}</small></h4></div>	
+					<div class="col-md-6 col-md-offset-3" id="create-heading">{% block desc %}<h4><small>{{ page.description }}</small></h4>{% endblock %}</div>	
 					</div>
           {% block blogpage %}
         <div class="col-md-6 blog-main col-md-offset-3">
