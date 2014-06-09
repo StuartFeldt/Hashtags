@@ -9,3 +9,7 @@
 /vendor/
 /bin/
 /composer.phar
+*.png
+*.jpg
+*.gif
+*.bak

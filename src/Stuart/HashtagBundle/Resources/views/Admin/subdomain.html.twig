@@ -1,0 +1,37 @@
+{% extends "StuartHashtagBundle:Admin:index.html.twig" %}
+
+{% block main %}
+<div id="paging">
+    <ul class="pagination">
+      <li><a href="/admin/tweets/{{sub}}/{{ active - 1 }}">&laquo;</a></li>
+      {% for i in 1..pages %}
+        <li {% if active==i %}class="active"{% endif %}><a href="/admin/tweets/{{ sub }}/{{ i }}">{{ i }}</a></li>
+      {% endfor %}
+      <li><a href="/admin/tweets/{{sub}}/{{ active + 1 }}">&raquo;</a></li>
+    </ul>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Tweet Body</th>
+            <th>Author</th>
+            <th>Time</th>
+            <th>Type</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tweet in tweets %}
+            <tr class="site-row">
+                <td class="tweet-body">{{ tweet.tweetBody }}</td>
+                <td class="tweet-author">{{ tweet.tweetAuthor }}</td>
+                <td class="tweet-time">{{ tweet.tweetTime }}</td>
+                <td class="tweet-pic">{{ tweet.tweetType }}</td>
+                <td class="tweet-edit"><a href="/admin/tweet/modify/{{ tweet.id }}" class="btn btn-success">Edit Tweet</a></td>
+                <td class="tweet-delete"><a href="/admin/tweet/delete/{{ tweet.id }}" class="btn btn-danger"><span class="glyphicon glyphicon-trash"></span></a></td>
+            </tr>
+        {% endfor %}
+    </tbody>  
+</table>
+{% endblock %}

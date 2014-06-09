@@ -1,0 +1,139 @@
+{% extends "StuartHashtagBundle::layout.html.twig" %}
+
+{% block desc %}{% endblock %}
+
+{% block main %}
+
+
+
+
+<!-- Get Started Buttons -->
+<div id="get-started">
+	<span> &bull; </span>
+	<a href="/create"class="bashtag-logo">Get Started</a>
+	<span> &bull; </span>
+	<a href="worldcup.hashtagmyevent.com" class="bashtag-logo">Demo</a>
+	<span> &bull; </span>
+	<a href="javascript:void()" role="button" data-toggle="modal" data-target="#twitterModal" class="bashtag-logo">Pricing</a>
+	<span> &bull; </span>
+</div>
+
+<!-- Twitter Modal -->
+<div class="modal fade" id="twitterModal" tabindex="-1" role="dialog" aria-labelledby="tModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title" id="tModalLabel">Plans & Pricing</h4>
+          </div>
+          <div class="modal-body">
+              <table class="table table-striped">
+								<tr>
+									<th></th>
+									<th>Free</th>
+									<th>Standard</th>
+									<th>Premium</th>
+								</tr>
+								<tbody>
+									<tr>
+										<td>Duration</td>
+										<td>2 Weeks</td>
+										<td>2 Months</td>
+										<td>1 Year</td>
+									</tr>
+									<tr>
+										<td>Twitter Support</td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+									</tr>
+									<tr>
+										<td>Instagram Support</td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+									</tr>
+									<tr>
+										<td>Pinterest Support</td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+									</tr>
+									<tr>
+										<td>Profanity Filter</td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+									</tr>
+									<tr>
+										<td>Custom Themes</td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+									</tr>
+									<tr>
+										<td>Custom Domain</td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+									</tr>
+									<tr>
+										<td>User Filters</td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td><span class="glyphicon glyphicon-ok ok"></span></td>
+									</tr>
+									<tr>
+										<td>Additional Hashtags</td>
+										<td><span class="glyphicon glyphicon-remove no"></span></td>
+										<td>3</td>
+										<td>10</td>
+									</tr>
+									<tr>
+										<td></td>
+										<td>$0</td>
+										<td>$199</td>
+										<td>$499</td>
+									</tr>
+								</tbody>
+									
+							</table>
+          </div>
+          <div class="modal-footer">
+						<h3 class="bashtag-logo pull-left" id="modal-foot-bashtag">Bashtag</h3>
+            <button type="button" class="btn btn-default bashtag-logo" data-dismiss="modal">got it!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}
+
+{% block extrascript %}
+<script>
+$(document).ready(function(){
+	$('.slick').slick({
+		autoplay: true,
+		pauseOnHover: false,
+		onBeforeChange: function(){
+			if($('.slick').slickCurrentSlide() == 0) {
+				changeDesc("Supported Platforms");
+			} else if($('.slick').slickCurrentSlide() == 3) {
+				changeDesc("Other Information");
+			} else if($('.slick').slickCurrentSlide() == 4) {
+				changeDesc("Hashtag your event for free");
+			}
+
+		}
+	});
+});
+
+function changeDesc(text) {
+$('#desc-mess').fadeOut(150, function() {
+	$(this).text(text).fadeIn(150);
+});
+}
+</script>
+
+{% endblock %}
+

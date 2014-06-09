@@ -1,0 +1,125 @@
+stuart_hashtag_view_sub:
+    pattern: /
+    host: "{name}.hashtagmyevent.com"
+    defaults: { _controller: StuartHashtagBundle:Default:view }  
+
+stuart_hashtag_admin_site_dev:
+    pattern: /view/{name}/modify
+    defaults: { _controller: StuartHashtagBundle:Create:adminSite}
+
+stuart_hashtag_admin_site:
+    pattern: /modify
+    host: "{name}.hashtagmyevent.com"
+    defaults: { _controller: StuartHashtagBundle:Create:adminSite}
+    
+stuart_hashtag_admin_site_home:
+    pattern: /modify
+    defaults: { _controller: StuartHashtagBundle:Create:adminHome}
+    
+stuart_hashtag_homepage:
+    pattern:  /
+    defaults: { _controller: StuartHashtagBundle:Default:index }
+
+stuart_hashtag_create:
+    pattern:  /create
+    defaults: { _controller: StuartHashtagBundle:Create:standard }
+    
+stuart_hashtag_standard:
+    pattern:  /create/standard
+    defaults: { _controller: StuartHashtagBundle:Create:standard }
+    
+stuart_hashtag_plus:
+    pattern:  /create/plus
+    defaults: { _controller: StuartHashtagBundle:Create:plus }
+  
+stuart_hashtag_professional:
+    pattern:  /create/premium
+    defaults: { _controller: StuartHashtagBundle:Create:professional }
+    
+stuart_hashtag_view:
+    pattern:  /view/{name}
+    defaults: { _controller: StuartHashtagBundle:Default:view } 
+    
+stuart_hashtag_poll:
+    pattern:  /poll/{id}
+    defaults: { _controller: StuartHashtagBundle:Default:poll }
+    
+stuart_hashtag_saveTweet:
+    pattern:  /save
+    defaults: { _controller: StuartHashtagBundle:Default:saveTweet }
+    
+stuart_hashtag_getActiveSites:
+    pattern:  /getActive
+    defaults: { _controller: StuartHashtagBundle:Default:getActive }
+    
+stuart_hashtag_getTweets:
+    pattern:  /getTweets/{id}
+    defaults: { _controller: StuartHashtagBundle:Default:getTweets }
+    
+stuart_hashtag_getTweetsTimeline:
+    pattern:  /getTweetsTimeline/{id}
+    defaults: { _controller: StuartHashtagBundle:Default:getTweetsTimeline }
+    
+stuart_hashtag_getInsta:
+    pattern:  /getInsta/{id}
+    defaults: { _controller: StuartHashtagBundle:Default:getInsta }
+    
+stuart_hashtag_preview:
+    pattern: /preview/{themeId}
+    defaults: { _controller: StuartHashtagBundle:Default:preview }
+    
+stuart_hashtag_admin:
+    pattern: /admin
+    defaults: { _controller: StuartHashtagBundle:Admin:index, page: 1 }
+    
+stuart_hashtag_admin_theme:
+    pattern: /admin/theme
+    defaults: { _controller: StuartHashtagBundle:Admin:theme, page: 1 }
+
+stuart_hashtag_admin_theme_add:
+    pattern: /admin/theme/add
+    defaults: { _controller: StuartHashtagBundle:Admin:addTheme}
+
+stuart_hashtag_admin_theme_page:
+    pattern: /admin/theme/{page}
+    defaults: { _controller: StuartHashtagBundle:Admin:theme, page: 1 }
+    
+stuart_hashtag_admin_theme_modify:
+    pattern: /admin/theme/modify/{theme}
+    defaults: { _controller: StuartHashtagBundle:Admin:modifyTheme}
+    
+stuart_hashtag_admin_page:
+    pattern: /admin/{page}
+    defaults: { _controller: StuartHashtagBundle:Admin:index}
+    
+stuart_hashtag_admin_tweets:
+    pattern: /admin/tweets/{sub}
+    defaults: { _controller: StuartHashtagBundle:Admin:subdomain, page: 1}
+    
+stuart_hashtag_admin_tweets_page:
+    pattern: /admin/tweets/{sub}/{page}
+    defaults: { _controller: StuartHashtagBundle:Admin:subdomain}
+ 
+stuart_hashtag_admin_delete_tweet:
+    pattern: /admin/tweet/delete/{tweet}
+    defaults: { _controller: StuartHashtagBundle:Admin:deleteTweet}
+    
+stuart_hashtag_admin_delete_site:
+    pattern: /admin/delete/{site}
+    defaults: { _controller: StuartHashtagBundle:Admin:deleteSite}
+
+stuart_hashtag_admin_modify_site:
+    pattern: /admin/modify/{site}
+    defaults: { _controller: StuartHashtagBundle:Admin:modifySite}
+    
+stuart_hashtag_admin_modify_tweet:
+    pattern: /admin/tweet/modify/{tweet}
+    defaults: { _controller: StuartHashtagBundle:Admin:modifyTweet}
+    
+stuart_hashtag_check_subdomain:
+    pattern: /checksub/{sub}
+    defaults: { _controller: StuartHashtagBundle:Create:checkSub}
+    
+stuart_hashtag_create_theme:
+    pattern: /create/theme
+    defaults: { _controller: StuartHashtagBundle:Create:createTheme}    

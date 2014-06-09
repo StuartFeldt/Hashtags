@@ -1,0 +1,7 @@
+#Stuart\HashtagBundle\Entity\Background:
+#    properties:
+#        file:
+#            - File:
+#                maxSize: 600
+#        name:
+#          - NotBlank: "Name is required"

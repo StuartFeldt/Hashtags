@@ -1,0 +1,21 @@
+.bashtag-logo {
+	font-family: 'Raleway', sans-serif;
+	font-weight:600;
+	color: rgba(60, 60, 60, .7);
+}
+
+.groovin {
+	padding: 10px;
+	text-align:center;
+  background-color: rgba(245,255,254,.6);
+}
+
+.bashtag-logo {
+	color: #000 !important;
+}
+
+#bashtag-inner {
+	width:270px;
+	margin-left:auto;
+	margin-right:auto;
+}

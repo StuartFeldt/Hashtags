@@ -1,0 +1,43 @@
+{% extends "StuartHashtagBundle:Default:standard.html.twig" %}
+
+{% block extracss %} 
+<link href="/assets/css/spectrum.css" rel="stylesheet">
+<link href="/assets/css/sp-soft.css" rel="stylesheet">
+{% endblock %}
+
+{% block themecreate %}
+{% include 'StuartHashtagBundle:Default:createTheme.html.twig' %}
+{% endblock %}
+
+{% block formextend %}
+
+<div class="form-group" id="bu-fg">
+    <label for="blockedUsers">Blocked Users</label>
+    <input type="text" class="form-control" name="blockedUsers1" id="blockedUsers1" placeholder="Blocked User 1">
+    <input type="text" class="form-control" name="blockedUsers2" id="blockedUsers2" placeholder="Blocked User 2">
+    <input type="text" class="form-control" name="blockedUsers3" id="blockedUsers3" placeholder="Blocked User 3">
+    <input type="text" class="form-control" name="blockedUsers4" id="blockedUsers4" placeholder="Blocked User 4">
+    <input type="text" class="form-control" name="blockedUsers5" id="blockedUsers5" placeholder="Blocked User 5">
+</div>
+
+<div class="form-group">
+    <label for="allowedUsers">Allowed Users</label>
+    <input type="text" class="form-control" id="allowedUsers">
+</div>
+{% endblock %}
+
+{% block themeextend %}
+<button class="btn btn-default" data-toggle="modal" data-target="#customThemeModal">
+  Customize Theme
+</button>
+{% endblock %}
+
+{% block extrascript %}
+<script src="/assets/js/spectrum.js"></script>
+{{ parent() }}
+<script>
+   $(".spectrum").spectrum({
+        theme: "sp-soft"
+    }); 
+</script>
+{% endblock %}

@@ -1,0 +1,63 @@
+{% extends "StuartHashtagBundle::layout.html.twig" %}
+{% block main %}
+<div class="row">
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" id="standard">
+        <h3>Standard</h3>
+      <img data-src="holder.js/200x200/Good/text:$0" alt="...">
+      <div class="features">
+          <ul class="feature-list">
+              <li>1 Hashtag</li>
+              <li>2 Weeks Included</li>              
+              <li>Default Themes</li>
+              <li>Profanity Filter</li>
+              <li>Twitter Support</li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" id="plus">
+        <h3>Standard+</h3>
+      <img data-src="holder.js/200x200/Better/text:$200" alt="...">
+      <div class="features">
+        <ul class="feature-list">
+              <li>3 Hashtags</li>
+              <li>2 Months Included</li>
+              <li>Custom Themes</li>
+              <li>Custom Filters</li>
+              <li>Instagram Support</li>
+              <li>Everything in Standard</li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail" id="pro">
+        <h3>Premium</h3>
+      <img data-src="holder.js/200x200/Best/text:$500" alt="...">
+      <div class="features">
+          <ul class="feature-list">
+              <li>Unlimited Hashtags</li>
+              <li>1 Year Included</li>
+              <li>Password Protect</li>
+              <li>Facebook Integration</li>
+              <li>Custom Domain</li>
+              <li>Everything in Standard</li>
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
+{% block options %}
+Idk what to put here, but this page gives me anxiety if nothing is over here.
+{% endblock %}
+{% block extrascript %}
+<script>
+    $('#standard').click(function(){
+       window.location.href = "/create/standard"; 
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,15 @@
+<div class="blog-masthead">
+    <div class="container">
+      <nav class="blog-nav">
+        {% block navlinks %}
+        <a class="blog-nav-item {% if page.description == "home" %}active{% endif %}" href="/">Home</a>
+        <a class="blog-nav-item {% if page.description == "Create" %}active{% endif %}" href="/create">Create Home</a>
+        <a class="blog-nav-item {% if page.description == "Standard" %}active{% endif %}" href="/create/standard">Standard</a>
+        <a class="blog-nav-item {% if page.description == "Standard+" %}active{% endif %}" href="/create/plus">Standard+</a>
+        <a class="blog-nav-item {% if page.description == "Premium" %}active{% endif %}" href="/create/premium">Premium</a>
+        <a class="blog-nav-item pull-right {% if page.description == "" %}active{% endif %}" href="/create/theme">Create Themes</a>
+        <a class="blog-nav-item pull-right {% if page.description == "Admin Panel" %}active{% endif %}" href="/modify">Admin Panel</a>
+        {% endblock %}
+      </nav>
+    </div>
+</div>

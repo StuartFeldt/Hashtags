@@ -1,0 +1,4 @@
+stuart_hashtag:
+    resource: "@StuartHashtagBundle/Resources/config/routing.yml"
+    prefix:   /
+

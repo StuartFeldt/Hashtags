@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>{{ page.title }}</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/assets/css/bootstrap.css" rel="stylesheet">
+	<link href='/assets/css/index.css' rel='stylesheet' type='text/css'>
+	<link href='/assets/css/bashtag.css' rel='stylesheet' type='text/css'>
+	<style>{{ page.css }}</style>
+	<!--[if lt IE 9]>
+		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link href='http://fonts.googleapis.com/css?family=Julius+Sans+One' rel='stylesheet' type='text/css'>
+	<link href='http://fonts.googleapis.com/css?family=Bangers' rel='stylesheet' type='text/css'>
+</head>
+<body>
+<div class="container">
+    <div class="row" id="main-contain">
+        <div class="row">
+            <div class="col-md-3">
+							<div class="row">
+								{% include "StuartHashtagBundle:modules:bashtag.html.twig" %}
+								<div class="btn-group ht-remote">
+									<button type="button" disabled="disabled" class="btn btn-default col-md-4">#{{ page.hashtag }}</button>
+									<button id="ht-control-play" onclick="ht.start()" title="Play" type="button" class="btn btn-default col-md-2"><span class="glyphicon glyphicon-play"></span></button>
+									<button id="ht-control-pause" onclick="ht.pause()" type="button" class="btn btn-default col-md-2"><span class="glyphicon glyphicon-pause"></span></button>
+									<button id="ht-control-random" onclick="ht.shuffle()" type="button" class="btn btn-default col-md-2 active"><span class="glyphicon glyphicon-random"></span></button>
+									<button id="ht-control-timeline" onclick="ht.timeline()" title="Toggle Timeline Mode" type="button" class="btn btn-default col-md-2"><span class="glyphicon glyphicon-time"></span></button>
+								</div>
+									<div id="tweet-stats list-group">
+										<a href="#" class="list-group-item">Twitter<span id="num-tweets" class="badge">...</span></a>
+										<a href="#" class="list-group-item">Instagram<span id="num-insta" class="badge">...</span></a>
+										<a href="#" class="list-group-item" disabled="disabled">Total<span id="num-total" class="badge">...</span></span></a>
+									 </div>
+									</div>
+            </div>
+            <div id="tweets" class="col-md-9" style="display:none;"></div>
+        </div>
+    </div>
+</div>    
+       
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script type="text/javascript" src="/assets/js/functions.js"></script>
+<script type="text/javascript" src="/assets/js/moment.js"></script>
+<script type="text/javascript" src="/assets/js/instajam.js"></script>
+<script type="text/javascript" src="/assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="/assets/js/Tweedia.js"></script>
+<script type="text/javascript" src="/assets/js/hashtags.js"></script>
+<script type="text/javascript" src="/assets/js/jquery.profanity.js"></script>
+<script type="text/javascript" src="/assets/js/spin.min.js"></script>
+<script>
+$(document).ready(function(){
+	if('{{ page.background }}' != '-1') {
+			console.log("has background");
+			$('body').css('background-image', 'url("/upload/documents/{{ page.background }}")');
+	}
+	ht.init({{ page.site }}, "{{ page.hashtag }}", 30000, 6000, {{ page.filterP }});
+	setTimeout(ht.start(), 500);
+
+	$(document).keydown(function(evt) {
+		if (evt.keyCode == 32) {
+			if(ht.options.playing) {
+					ht.pause();
+				} else {
+					ht.start();
+				}
+		}
+	});
+	$("#bashtag").click(function(){
+			window.location = "/";
+	});
+});
+</script>
+</body>
+</html>
