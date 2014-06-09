@@ -1,6 +1,6 @@
 stuart_hashtag_view_sub:
     pattern: /
-    host: "{name}.hashtagmyevent.com"
+    host: "{name}.bashtag.me"
     defaults: { _controller: StuartHashtagBundle:Default:view }  
 
 stuart_hashtag_admin_site_dev:
@@ -9,7 +9,7 @@ stuart_hashtag_admin_site_dev:
 
 stuart_hashtag_admin_site:
     pattern: /modify
-    host: "{name}.hashtagmyevent.com"
+    host: "{name}.bashtag.me"
     defaults: { _controller: StuartHashtagBundle:Create:adminSite}
     
 stuart_hashtag_admin_site_home:
