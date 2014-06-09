@@ -1,45 +1,20 @@
 {% extends "StuartHashtagBundle::layout.html.twig" %}
 
-{% block desc %}<div><h2><small id="desc-mess">Hashtag your event for free</small></h2></div><hr>{% endblock %}
+{% block desc %}{% endblock %}
 
 {% block main %}
 
-<!-- Slick -->
-<div class="slick">
-	<div class="slick-bash-slide">
-    <h2>Welcome to Bashtag</h2>
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consequat diam. Pellentesque a volutpat nunc, sit amet ornare sem. Nunc aliquam egestas metus quis ultrices. </p>
-	</div>
-  <div class="slick-bash-slide">
-		<img  src="/assets/Social_Icons/twitter.png" alt="Generic placeholder image">
-    <h2>Twitter</h2>
-    <p>Pull tweets from Twitter based on #hashtag.  Images from yfrog, instagram, and twitpic will be displayed.</p>
-	</div>
-  <div class="slick-bash-slide">
-		<img src="/assets/Social_Icons/Instagram.png" alt="Generic placeholder image">
-		<h2>Instagram</h2>
-		<p>Pull images posed to Instagram tagged with #hashtag.  Also, displays any associated text and author.</p>
-	</div>
-	<div class="slick-bash-slide">
-		<img src="/assets/Social_Icons/pinterest.png" alt="Generic placeholder image">
-		<h2>Pinterest</h2>
-		<p>I don't really know exactly what pinterest does, but we will pull it.</p>	
-	</div>
-  <div class="slick-bash-slide">
-		<p>Other fun facts.</p>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi in consequat diam. Pellentesque a volutpat nunc, sit amet ornare sem. Nunc aliquam egestas metus quis ultrices. </p>
-	</div>
-</div>
-<hr>
+
+
 
 <!-- Get Started Buttons -->
 <div id="get-started">
 	<span> &bull; </span>
-	<a href="/create" type="button" class="btn btn-default btn-lg bashtag-logo">Get Started</a>
+	<a href="/create"class="bashtag-logo">Get Started</a>
 	<span> &bull; </span>
-	<a href="/view/test123" class="btn btn-default btn-lg bashtag-logo">LIVE DEMO</a>
+	<a href="worldcup.hashtagmyevent.com" class="bashtag-logo">Demo</a>
 	<span> &bull; </span>
-	<a  href="javascript:void()" role="button" data-toggle="modal" data-target="#twitterModal" class="btn btn-lg btn-default bashtag-logo">Pricing</a>
+	<a href="javascript:void()" role="button" data-toggle="modal" data-target="#twitterModal" class="bashtag-logo">Pricing</a>
 	<span> &bull; </span>
 </div>
 
@@ -162,4 +137,3 @@ $('#desc-mess').fadeOut(150, function() {
 
 {% endblock %}
 
-{% block footer %}{% endblock %}

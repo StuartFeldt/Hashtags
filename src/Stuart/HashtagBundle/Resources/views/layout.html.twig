@@ -9,10 +9,9 @@
     <link rel="shortcut icon" href="/favicon.ico">
 
     <title>{{ page.title }}</title>
-    <link href='http://fonts.googleapis.com/css?family=Quicksand' rel='stylesheet' type='text/css'>
     <!-- Bootstrap core CSS -->
     <link href="/assets/css/bootstrap.css" rel="stylesheet">
-		<link href='http://fonts.googleapis.com/css?family=Bangers|Puritan' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
     <!-- Custom styles for this template -->
 		<link href='/assets/css/home.css' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" type="text/css" href="/assets/slick/slick.css"/>
@@ -26,14 +25,11 @@
   </head>
 
   <body>
-
+		<div id="wrap">
+					{% include 'StuartHashtagBundle:modules:bashtag.html.twig' %}
     <div class="container">   
       <div class="row">
-				<div class='col-md-6 col-md-offset-3'>
-					{% include 'StuartHashtagBundle:modules:bashtag.html.twig' %}
-				</div>
-					<div class="col-md-6 col-md-offset-3" id="create-heading">{% block desc %}<h4><small>{{ page.description }}</small></h4>{% endblock %}</div>	
-					</div>
+					<div class="col-md-6 col-md-offset-3" id="create-heading">{% block desc %}<h4><small>{{ page.description }}</small></h4>{% endblock %}</div>
           {% block blogpage %}
         <div class="col-md-6 blog-main col-md-offset-3">
            {% block main %}{% endblock %}
@@ -42,13 +38,11 @@
       </div><!-- /.row -->
 
     </div><!-- /.container -->
-
+		</div>
 		{% block footer %}
-    <div class="blog-footer">
-      <p>
-        <a href="/" class="bashtag-logo">BASHTAG</a>
-      </p>
-    </div>
+    <div id="main-footer">
+	
+	</div>
     {% endblock %}
 
     <!-- Bootstrap core JavaScript
@@ -62,9 +56,6 @@
         Holder.add_theme("Good", {background:"#ECF3F3", foreground:"#A5AAAA", size:75, font: "Monaco", fontweight:"normal"});
         Holder.add_theme("Better", {background:"#5bc0de", foreground:"#eee", size:75, font: "Monaco", fontweight:"normal"});
         Holder.add_theme("Best", {background:"#5cb85c", foreground:"#eee", size:75, font: "Monaco", fontweight:"normal"});
-				$("#bashtag").click(function(){
-						window.location = "/";
-				});
     </script>
 		
     {% block extrascript %}{% endblock %}
