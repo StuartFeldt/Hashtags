@@ -1,0 +1,10 @@
+{
+  "project.name" : "HTME",
+  "phabricator.uri" : "http://phabricator.stuartfeldt.com/",
+  "lint.engine" : "PhabricatorLintEngine",
+  "unit.engine" : "PhutilUnitTestEngine",
+  "repository.callsign" : "HTME",
+  "load" : ["/var/www/phabricator/src/"],
+  "lint.xhpast.naminghook" : "PhabricatorSymbolNameLinter",
+  "lint.jshint.config" : "support/jshint/jshintconfig"
+}
