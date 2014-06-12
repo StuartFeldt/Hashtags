@@ -54,8 +54,10 @@ body {
 	text-align:center;
 }
 
-#get-started {
+#get-started, #start-now {
 	text-align:center;
+	margin-left:auto;
+	margin-right:auto;
 }
 .ok {
 	color:#009933;
@@ -98,4 +100,12 @@ body {
 #social-links {
 	text-align:center;
 	margin-right:-30px;
+}
+
+#start-now {
+	margin-top:24px;
+}
+
+#get-started h3 small {
+	color:black;
 }
