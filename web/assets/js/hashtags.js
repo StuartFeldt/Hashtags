@@ -16,7 +16,7 @@
             hashtag: "",
             pullInt: 10000,
             showInt: 6000,
-            env: "/app_dev.php/",
+            env: "/",
             timeline: false,
             initiated: false,
             playing: false,
