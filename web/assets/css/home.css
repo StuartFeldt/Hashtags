@@ -4,6 +4,7 @@ html,body {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+	overflow-x: hidden;
 	height:100%;
 }
 body { 
