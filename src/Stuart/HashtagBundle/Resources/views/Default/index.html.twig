@@ -9,7 +9,8 @@
 
 <!-- Get Started Buttons -->
 <div id="get-started">
-	<p class="lead">relive your bash as it happened on social media</p>
+	<p class="lead">document your bash as it happens</p>
+  <!--<p class="lead">document your bash as it happens</p>-->
 	<span> &bull; </span>
 	<a href="/create"class="bashtag-logo">Get Started</a>
 	<span> &bull; </span>
@@ -19,20 +20,6 @@
 	<span> &bull; </span>
 </div>
 
-<!--
-<div id="start-now" class="row">
-	<div id="start-now-desc" class="col-md-6">
-			{this should only show when get started is clicked} Get started now by specifiying a hashtag to follow on social media & a bashtag name.
-	</div>
-	
-	<div id="start-now-form" col-md-6>
-		<table>
-			<tr><td>Hashtag </td><td><input type="text" /></td></tr>
-			<tr><td>Name </td><td><input type="text" /></td></tr>
-		</table>
-	</div>
-</div>
--->
 <!-- Twitter Modal -->
 <div class="modal fade" id="twitterModal" tabindex="-1" role="dialog" aria-labelledby="tModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -119,32 +106,3 @@
       </div>
     </div>
 {% endblock %}
-
-{% block extrascript %}
-<script>
-$(document).ready(function(){
-	$('.slick').slick({
-		autoplay: true,
-		pauseOnHover: false,
-		onBeforeChange: function(){
-			if($('.slick').slickCurrentSlide() == 0) {
-				changeDesc("Supported Platforms");
-			} else if($('.slick').slickCurrentSlide() == 3) {
-				changeDesc("Other Information");
-			} else if($('.slick').slickCurrentSlide() == 4) {
-				changeDesc("Hashtag your event for free");
-			}
-
-		}
-	});
-});
-
-function changeDesc(text) {
-$('#desc-mess').fadeOut(150, function() {
-	$(this).text(text).fadeIn(150);
-});
-}
-</script>
-
-{% endblock %}
-

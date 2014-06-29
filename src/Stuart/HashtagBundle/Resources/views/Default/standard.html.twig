@@ -3,6 +3,7 @@
 	<link href='/assets/css/create.css' rel='stylesheet' type='text/css'>
 {% endblock %}
 {% block main %}
+<div class="bash well">
   {% if messages != 0 %}
     <div class="alert alert-danger alert-dismissable">{{ messages.error }}</div>
   {% endif %}
@@ -12,39 +13,36 @@
 <div id="general">
 {{ form_start(form, {'attr': {'role': 'form'}}) }}
   <div class="form-group has-feedback" id="hash-fg">
-        {{form_label(form.hashtag)}}
         {{ form_errors(form.hashtag) }}
       <div class="input-group has-feedback">
         <span class="input-group-addon">#</span>
-        {{ form_widget(form.hashtag, {'attr': {'class': 'form-control', 'placeholder': 'Enter Hashtag'}}) }}
+        {{ form_widget(form.hashtag, {'attr': {'class': 'form-control', 'placeholder': "What's your hashtag?"}}) }}
         <span class="glyphicon form-control-feedback fg-icon"></span>
       </div>
   </div>
 
   <div class="form-group has-feedback" id="name-fg">
-    {{form_label(form.name)}}
     {{ form_errors(form.name) }}
-    {{ form_widget(form.name, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Name'}}) }}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control not-hashtag', 'placeholder': "What's the name of your bash?"}}) }}
     <span class="glyphicon form-control-feedback"></span>
   </div>
 
   <div class="form-group has-feedback" id="sub-fg">
-    {{form_label(form.subdomain)}}
     {{ form_errors(form.subdomain) }}
     <div class="input-group">
-        {{ form_widget(form.subdomain, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Enter Subdomain'}}) }}
+        {{ form_widget(form.subdomain, {'attr': {'class': 'form-control not-hashtag', 'placeholder': 'Where do you want it to be?'}}) }}
         <span class="glyphicon form-control-feedback fg-icon"></span>
         <span class="input-group-addon">.bashtag.me</span>
         
     </div>
   </div>
-
+</div>
+<!--
   <div class="form-group has-feedback">
     {{form_label(form.startDate)}}
     {{ form_errors(form.startDate) }}
     {{ form_widget(form.startDate, {'attr': {'class': 'form-control not-hashtag'}}) }}
   </div>
-</div>
 
 <p class="form-divider">Appearance</p>
   <div class="form-group">
@@ -81,15 +79,12 @@
       <input type="checkbox" id="profanity">
     </div>
     {% block formextend %}{% endblock %}
-
-  {{ form_widget(form.create, {'attr': {'class': 'btn btn-default'}}) }}
+-->
+  {{ form_widget(form.create, {'attr': {'class': 'btn btn-default', 'disabled': 'disabled'}}) }}
+  <span>Bashtag is coming soon.</span>
 {{ form_end(form) }}
+</div>
 {% endblock %}
-  
-{% block options %}
-    <h4>Want More Options?</h4>
-    <p>Try the <a href="/create/plus">Standard+</a> or <a href="/create/premium">Premium</a> options for blocking usernames, blocking profanity, and additional hashtag </p>
-{% endblock %}  
     
 {% block extrascript %}
 <script>
@@ -146,75 +141,7 @@ $('#confirmPass').change(function(){
         $('.pass-fg span').addClass('glyphicon-remove');
     }
 });    
-    
-var hashtagOpts = {
-    title: "Hashtag",
-    html: true,
-    content: "<b>Start Here!</b> <p><span class='label label-primary'>Required</span> This will be the hashtag Tweets & Instagram posts will be pulled by.</p>",
-    container: "body",
-    trigger: 'hover'
-};
-
-var nameOpts = {
-    title: "Event Name",
-    html: true,
-    content: "<span class='label label-primary'>Required</span> This will be the name for your site.  It is shown in the page title.",
-    container: "body",
-    trigger: 'hover'
-};
-
-var subdomainOpts = {
-    title: "Subdomain",
-    html: true,
-    content: "<span class='label label-primary'>Required</span> The subdomain is how your event will be accessed.  For example, if myevent was entered here, your site can be found at http://myevent.hashtagmyevent.com",
-    container: "body",
-    trigger: 'hover'
-};
-
-var dateOpts = {
-    title: "Event Start Date",
-    html: true,
-    content: "<span class='label label-primary'>Required</span> This will be the date the event becomes active. For standard packages, the end date is 2 weeks after the start date.",
-    container: "body",
-    trigger: 'hover'
-};
-
-var fileOpts = {
-    title: "Custom Background",
-    html: true,
-    content: "<span class='label label-default'>Optional</span> You may specify a custom background.",
-    container: "body",
-    trigger: 'hover'
-};
-
-var themeOpts = {
-    title: "Choose a theme",
-    html: true,
-    content: "<span class='label label-primary'>Required</span> Preview themes by clicking 'Preview Themes'",
-    container: "body",
-    trigger: 'hover'
-};
-
-var passOpts = {
-    title: "Specify a password",
-    html: true,
-    content: "<span class='label label-primary'>Required</span> Specify a password to be able to modify site options.",
-    container: "body",
-    trigger: 'hover'
-};
-
-    $('#form_hashtag').popover(hashtagOpts);
-    $('#form_subdomain').popover(subdomainOpts);
-    $('#form_name').popover(nameOpts);
-    $('#form_startDate').popover(dateOpts);
-    $('#form_file').popover(fileOpts);
-    $('#form_themeId').popover(themeOpts);
-    $('#form_password').popover(passOpts);
-   // $('#form_hashtag').popover('show');
-    $('.not-hashtag').hover( function(){
-        $('#form_hashtag').popover('hide');
-    });
-});
+  
 </script>
     
 {% endblock %}

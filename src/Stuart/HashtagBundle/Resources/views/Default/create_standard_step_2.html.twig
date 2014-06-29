@@ -1,0 +1,35 @@
+<p class="form-divider">Appearance</p>
+  <div class="form-group">
+    {{form_label(form.file)}}
+    {{ form_errors(form.file) }}
+    {{ form_widget(form.file, {'attr': {'class': 'form-control not-hashtag'}}) }}
+  </div>
+
+    <div class="form-group">
+      {{form_label(form.themeId)}}
+      {{ form_errors(form.themeId) }}
+      {{ form_widget(form.themeId, {'attr': {'class': 'form-control not-hashtag'}}) }}
+    {% block themeextend %}{% endblock %}
+    </div>
+
+
+<p class="form-divider">Admin Password</p>
+   <div class="form-group has-feedback pass-fg">
+      {{form_label(form.password)}}
+      {{ form_errors(form.password) }}
+      {{ form_widget(form.password, {'attr': {'class': 'form-control not-hashtag'}}) }}
+      <span class="glyphicon form-control-feedback"></span>
+   </div>
+
+    <div class="form-group has-feedback pass-fg">
+      <label for="confirmPass">Confirm Password</label>
+      <input type="password" class="form-control" id="confirmPass">
+      <span class="glyphicon form-control-feedback"></span>
+    </div>
+
+<p class="form-divider">Filters</p>
+    <div class="form-group has-feedback pass-fg">
+      <label for="profanity">Profanity Filter</label>
+      <input type="checkbox" id="profanity">
+    </div>
+    {% block formextend %}{% endblock %}
